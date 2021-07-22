@@ -23,7 +23,7 @@ public class Booking {
 	
 	@ManyToOne()
 	@JoinColumn(name="user_Id", referencedColumnName="user_Id")
-	private User userId;
+	private Users userId;
 	
 	@Column(name="booking_Date")
 	private Date bookingDate;
@@ -47,10 +47,10 @@ public class Booking {
 	public void setBookingId(BigInteger bookingId) {
 		this.bookingId = bookingId;
 	}
-	public User getUserId() {
+	public Users getUserId() {
 		return userId;
 	}
-	public void setUserId(User userId) {
+	public void setUserId(Users userId) {
 		this.userId = userId;
 	}
 	public Date getBookingDate() {
@@ -89,7 +89,7 @@ public class Booking {
 				+ ", passengerList=" + passengerList + ", ticketCost=" + ticketCost + ", scheduledFlight=" + scheduledFlight
 				+ ", noOfPassangers=" + noOfPassangers + "]";
 	}
-	public Booking(BigInteger bookingId, User userId, Date bookingDate, List<Passenger> passengerList,
+	public Booking(BigInteger bookingId, Users userId, Date bookingDate, List<Passenger> passengerList,
 			BigDecimal ticketCost, ScheduledFlight scheduledFlight, int noOfPassangers) {
 		super();
 		this.bookingId = bookingId;

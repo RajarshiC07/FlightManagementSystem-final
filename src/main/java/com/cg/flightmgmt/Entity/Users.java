@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class Users {
 
 	@Column(name="user_Type")
 	private String userType;
@@ -65,7 +65,7 @@ public class User {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	public User(String userType, BigInteger userId, String userName, String userPassword, BigInteger userPhone,
+	public Users(String userType, BigInteger userId, String userName, String userPassword, BigInteger userPhone,
 			String userEmail) {
 		super();
 		this.userType = userType;
@@ -75,7 +75,7 @@ public class User {
 		this.userPhone = userPhone;
 		this.userEmail = userEmail;
 	}
-	public User() {
+	public Users() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
