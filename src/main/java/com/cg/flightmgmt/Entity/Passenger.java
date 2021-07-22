@@ -1,4 +1,4 @@
-package com.cg.flightmgmt.entity;
+package com.cg.flightmgmt.Entity;
 
 import java.math.BigInteger;
 import javax.persistence.Column;
