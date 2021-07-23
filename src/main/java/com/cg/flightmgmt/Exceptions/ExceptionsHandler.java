@@ -39,7 +39,12 @@ public class ExceptionsHandler extends ResponseEntityExceptionHandler {
 		ErrorMessage msg=new ErrorMessage(HttpStatus.NOT_FOUND,ex.getMessage());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg);
 	}
-	
+	@ExceptionHandler(AirportNotFoundException.class)
+	public ResponseEntity<ErrorMessage> handleAirportNotFoundException(AirportNotFoundException ex,WebRequest req)
+	{
+		ErrorMessage msg=new ErrorMessage(HttpStatus.NOT_FOUND,ex.getMessage());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg);
+	}
 	@ExceptionHandler(RecordAlreadyPresentException.class)
 	public ResponseEntity<ErrorMessage> handleRecordAlreadyPresentException(RecordAlreadyPresentException ex,WebRequest req)
 	{
