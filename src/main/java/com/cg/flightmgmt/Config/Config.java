@@ -18,7 +18,7 @@ import com.cg.flightmgmt.Entity.Users;
 
 @Configuration
 public class Config {
-	/*@Bean("Users")
+	@Bean("Users")
 	public Users getUsers()
 	{
 		Users users = new Users();
@@ -43,7 +43,7 @@ public class Config {
 	public Flight getFlight()
 	{
 		Flight flight = new Flight();
-		flight.setFlightNumber(new BigInteger("Fl1826"));
+		flight.setFlightNumber(new BigInteger("1826"));
 		flight.setCarrierName("plane");
 		flight.setFlightModel("bxb");
 		flight.setSeatCapacity(100);
@@ -84,5 +84,5 @@ public class Config {
 		booking.setNoOfPassangers(200);
 		booking.setTicketCost(new BigDecimal("100.38"));
 		return booking;
-	}*/
+	}
 }
