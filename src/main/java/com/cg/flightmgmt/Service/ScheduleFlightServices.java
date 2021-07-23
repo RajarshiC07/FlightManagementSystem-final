@@ -15,9 +15,10 @@ import com.cg.flightmgmt.Entity.ScheduledFlight;
 public interface ScheduleFlightServices {
 public ScheduledFlight scheduleFlight(ScheduledFlight scheduledFlight ) ;
 public List<ScheduledFlight> viewScheduledFlights(Airport sourceAirport , Airport destinationAirport, LocalDate date);
-public Flight viewScheduledFlights(BigInteger scheduledFlightId);
+public List<ScheduledFlight> viewScheduledFlights(BigInteger FlightId);
 public List<ScheduledFlight> viewScheduledFlight();
 public ScheduledFlight modifyScheduledFlight(Flight flight ,Schedule schedule , Integer availableSeats);
+public ScheduledFlight modifyScheduledFlight(ScheduledFlight scheduledFlight);
 public void deleteScheduledFlight(BigInteger scheduledFlightId);
 public void validateScheduledFlight(ScheduledFlight scheduledFlight);
 }
