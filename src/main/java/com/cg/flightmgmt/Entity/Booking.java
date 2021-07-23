@@ -2,6 +2,7 @@ package com.cg.flightmgmt.Entity;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,8 +29,8 @@ public class Booking {
 	@Column(name="booking_Date")
 	private Date bookingDate;
 	
-	@OneToMany(mappedBy="pnr_Number", targetEntity=Passenger.class, cascade=CascadeType.ALL)
-	private List <Passenger>passengerList;
+	@OneToMany(mappedBy="pnrNumber", targetEntity=Passenger.class, cascade=CascadeType.ALL)
+	private List <Passenger>passengerList = new ArrayList<Passenger>();
 	
 	@Column(name="ticket_Cost")
 	private BigDecimal ticketCost;
@@ -40,6 +41,12 @@ public class Booking {
 	
 	@Column(name="noOf_Passangers")
 	private int noOfPassangers;
+	
+	public void addPassenger(Passenger psngr)
+	{
+		passengerList.add(psngr);
+	}
+	
 	
 	public BigInteger getBookingId() {
 		return bookingId;

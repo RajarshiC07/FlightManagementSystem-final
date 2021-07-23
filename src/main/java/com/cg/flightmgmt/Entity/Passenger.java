@@ -1,9 +1,12 @@
 package com.cg.flightmgmt.Entity;
 
 import java.math.BigInteger;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 @Entity
 public class Passenger {
 
@@ -18,7 +21,17 @@ public class Passenger {
 	private BigInteger passengerUIN;
 	@Column(name="luggage")
 	private Double luggage;
-
+	
+	@ManyToOne()
+	@JoinColumn(name="booking_Id", referencedColumnName="booking_Id")
+	private Booking booking;
+	
+	public Booking getBooking() {
+		return booking;
+	}
+	public void setBooking(Booking booking) {
+		this.booking = booking;
+	}
 	public Passenger() {
 		super();
 		// TODO Auto-generated constructor stub

@@ -21,13 +21,11 @@ public class Schedule {
 	private int scheduleId;
 	
 	@OneToOne(targetEntity=Airport.class,cascade=CascadeType.ALL)
-	@JoinColumn(name="airport_Code",referencedColumnName="airport_Code")
-	@Column(name="source_Airport")
+	@JoinColumn(name="source_airport_Code",referencedColumnName="airport_Code")
 	private  Airport sourceAirport;
 	
 	@OneToOne(targetEntity=Airport.class,cascade=CascadeType.ALL)
-	@JoinColumn(name="airport_Code",referencedColumnName="airport_Code")
-	@Column(name="destination_Airport")
+	@JoinColumn(name="destination_airport_Code",referencedColumnName="airport_Code")
 	private  Airport destinationAirport;
 	
 	@Column(name="arrival_Time")

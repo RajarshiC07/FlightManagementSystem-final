@@ -12,7 +12,7 @@ import com.cg.flightmgmt.Entity.Flight;
 
 @SpringBootTest
 class FlightManagementSystemApplicationTests {
-	Flight flight;
+	/*Flight flight;
 	@BeforeAll
 	void contextLoads() {
 		flight=new Flight(new BigInteger("123"),"AirIndia","A1111",200);
@@ -23,6 +23,6 @@ class FlightManagementSystemApplicationTests {
 		assertEquals("AirIndia",flight.getCarrierName());
 		assertEquals("A1111",flight.getFlightModel());
 		assertEquals(200,flight.getSeatCapacity().intValue());
-	}
+	}*/
 
 }

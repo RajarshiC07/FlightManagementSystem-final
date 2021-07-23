@@ -1,10 +1,14 @@
 package com.cg.flightmgmt.Entity;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Users {
@@ -21,14 +25,26 @@ public class Users {
 	
 	@Column(name="user_Password")
 	private String userPassword;
-	@Id
+
 	@Column(name="user_Phone")
 	private BigInteger userPhone;
 	
 	@Column(name="user_Email")
 	private String userEmail;
 	
+	@OneToMany(mappedBy="bookingId", targetEntity=Booking.class, cascade=CascadeType.ALL)
+	private List <Booking>bookingList = new ArrayList<Booking>();
 	
+	public void addBooking(Booking bkg)
+	{
+		bookingList.add(bkg);
+	}
+	public List<Booking> getBookingList() {
+		return bookingList;
+	}
+	public void setBookingList(List<Booking> bookingList) {
+		this.bookingList = bookingList;
+	}
 	public String getUserType() {
 		return userType;
 	}

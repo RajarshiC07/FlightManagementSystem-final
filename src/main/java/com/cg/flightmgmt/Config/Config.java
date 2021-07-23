@@ -18,7 +18,7 @@ import com.cg.flightmgmt.Entity.Users;
 
 @Configuration
 public class Config {
-	@Bean("Users")
+	/*@Bean("Users")
 	public Users getUsers()
 	{
 		Users users = new Users();
@@ -84,5 +84,5 @@ public class Config {
 		booking.setNoOfPassangers(200);
 		booking.setTicketCost(new BigDecimal("100.38"));
 		return booking;
-	}
+	}*/
 }
