@@ -1,5 +1,4 @@
-package com.cg.flightmgmt.Sevice;
-
+package com.cg.flightmgmt.Service;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
