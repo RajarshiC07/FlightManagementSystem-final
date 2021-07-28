@@ -15,7 +15,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Booking {
 
 	@Id
@@ -29,6 +38,7 @@ public class Booking {
 	@Column(name="booking_Date")
 	private Date bookingDate;
 	
+	@Builder.Default
 	@OneToMany(mappedBy="pnrNumber", targetEntity=Passenger.class, cascade=CascadeType.ALL)
 	private List <Passenger>passengerList = new ArrayList<Passenger>();
 	
@@ -47,69 +57,5 @@ public class Booking {
 		passengerList.add(psngr);
 	}
 	
-	
-	public BigInteger getBookingId() {
-		return bookingId;
-	}
-	public void setBookingId(BigInteger bookingId) {
-		this.bookingId = bookingId;
-	}
-	public Users getUserId() {
-		return userId;
-	}
-	public void setUserId(Users userId) {
-		this.userId = userId;
-	}
-	public Date getBookingDate() {
-		return bookingDate;
-	}
-	public void setBookingDate(Date bookingDate) {
-		this.bookingDate = bookingDate;
-	}
-	public List<Passenger> getPassengerList() {
-		return passengerList;
-	}
-	public void setPassengerList(List<Passenger> passengerList) {
-		this.passengerList = passengerList;
-	}
-	public BigDecimal getTicketCost() {
-		return ticketCost;
-	}
-	public void setTicketCost(BigDecimal ticketCost) {
-		this.ticketCost = ticketCost;
-	}
-	public ScheduledFlight getScheduledFlight() {
-		return scheduledFlight;
-	}
-	public void setScheduledFlight(ScheduledFlight scheduledFlight) {
-		this.scheduledFlight = scheduledFlight;
-	}
-	public int getNoOfPassangers() {
-		return noOfPassangers;
-	}
-	public void setNoOfPassangers(int noOfPassangers) {
-		this.noOfPassangers = noOfPassangers;
-	}
-	@Override
-	public String toString() {
-		return "Booking [bookingId=" + bookingId + ", userId=" + userId + ", bookingDate=" + bookingDate
-				+ ", passengerList=" + passengerList + ", ticketCost=" + ticketCost + ", scheduledFlight=" + scheduledFlight
-				+ ", noOfPassangers=" + noOfPassangers + "]";
-	}
-	public Booking(BigInteger bookingId, Users userId, Date bookingDate, List<Passenger> passengerList,
-			BigDecimal ticketCost, ScheduledFlight scheduledFlight, int noOfPassangers) {
-		super();
-		this.bookingId = bookingId;
-		this.userId = userId;
-		this.bookingDate = bookingDate;
-		this.passengerList = passengerList;
-		this.ticketCost = ticketCost;
-		this.scheduledFlight = scheduledFlight;
-		this.noOfPassangers = noOfPassangers;
-	}
-	public Booking() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 	
 }

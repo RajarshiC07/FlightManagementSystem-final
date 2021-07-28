@@ -1,5 +1,7 @@
 package com.cg.flightmgmt.Entity;
 
+import java.math.BigInteger;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +11,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ScheduledFlight {
 	
 	@Id
@@ -28,55 +39,4 @@ public class ScheduledFlight {
 	@JoinColumn(name="schedule_Id",referencedColumnName="schedule_Id")
 	private Schedule schedule;
 
-	public int getScheduledFlightId() {
-		return scheduledFlightId;
-	}
-
-	public void setScheduledFlightId(int scheduledFlightId) {
-		this.scheduledFlightId = scheduledFlightId;
-	}
-
-	public Flight getFlight() {
-		return flight;
-	}
-
-	public void setFlight(Flight flight) {
-		this.flight = flight;
-	}
-
-	public Integer getAvailableSeats() {
-		return availableSeats;
-	}
-
-	public void setAvailableSeats(Integer availableSeats) {
-		this.availableSeats = availableSeats;
-	}
-
-	public Schedule getSchedule() {
-		return schedule;
-	}
-
-	public void setSchedule(Schedule schedule) {
-		this.schedule = schedule;
-	}
-
-	public ScheduledFlight() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public ScheduledFlight(int scheduledFlightId, Flight flight, Integer availableSeats, Schedule schedule) {
-		super();
-		this.scheduledFlightId = scheduledFlightId;
-		this.flight = flight;
-		this.availableSeats = availableSeats;
-		this.schedule = schedule;
-	}
-
-	@Override
-	public String toString() {
-		return "ScheduledFlight [scheduledFlightId=" + scheduledFlightId + ", flight=" + flight + ", availableSeats="
-				+ availableSeats + ", schedule=" + schedule + "]";
-	}
-	
 }

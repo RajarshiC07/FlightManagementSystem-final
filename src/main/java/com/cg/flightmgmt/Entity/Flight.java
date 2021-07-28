@@ -5,7 +5,16 @@ import java.math.BigInteger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 @Entity
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Flight {
 @Id
 @Column(name="flight_Number")
@@ -16,45 +25,4 @@ private String carrierName;
 private String flightModel;
 @Column(name="seat_Capacity")
 private Integer seatCapacity;
-public Flight(BigInteger flightNumber, String carrierName, String flightModel, Integer seatCapacity) {
-	super();
-this.flightNumber = flightNumber;
-this.carrierName = carrierName;
-this.flightModel = flightModel;
-this.seatCapacity = seatCapacity;
-}
-public Flight() {
-	super();
-	// TODO Auto-generated constructor stub
-}
-public BigInteger getFlightNumber() {
-	return flightNumber;
-}
-public void setFlightNumber(BigInteger flightNumber) {
-	this.flightNumber = flightNumber;
-}
-public String getCarrierName() {
-	return carrierName;
-}
-public void setCarrierName(String carrierName) {
-	this.carrierName = carrierName;
-}
-public String getFlightModel() {
-	return flightModel;
-}
-public void setFlightModel(String flightModel) {
-	this.flightModel = flightModel;
-}
-public Integer getSeatCapacity() {
-	return seatCapacity;
-}
-public void setSeatCapacity(Integer seatCapacity) {
-	this.seatCapacity = seatCapacity;
-}
-@Override
-public String toString() {
-	return "Flight [flightNumber=" + flightNumber + ", carrierName=" + carrierName + ", flightModel=" + flightModel
-			+ ", seatCapacity=" + seatCapacity + "]";
-}
-
 }
