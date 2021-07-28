@@ -6,13 +6,14 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cg.flightmgmt.Entity.Flight;
 import com.cg.flightmgmt.Exceptions.FlightNotFoundException;
 import com.cg.flightmgmt.Exceptions.RecordAlreadyPresentException;
 import com.cg.flightmgmt.Repository.FlightDao;
 
-
+@Service
 public class FlightServiceImpl implements FlightService {
 
 	@Autowired
