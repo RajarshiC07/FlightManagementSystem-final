@@ -15,5 +15,4 @@ public class FlightManagementSystemApplication {
 		ConfigurableApplicationContext con = SpringApplication.run(FlightManagementSystemApplication.class, args);
 
 	}
-
 }
