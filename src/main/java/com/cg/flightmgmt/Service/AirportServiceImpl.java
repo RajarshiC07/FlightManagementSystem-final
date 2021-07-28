@@ -6,12 +6,14 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.cg.flightmgmt.Entity.Airport;
 import com.cg.flightmgmt.Exceptions.AirportNotFoundException;
 import com.cg.flightmgmt.Exceptions.RecordAlreadyPresentException;
 import com.cg.flightmgmt.Repository.AirportDao;
 
+@Service
 public class AirportServiceImpl implements AirportService{
 	
 	@Autowired

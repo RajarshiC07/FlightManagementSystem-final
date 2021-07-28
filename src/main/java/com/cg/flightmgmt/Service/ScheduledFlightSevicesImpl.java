@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cg.flightmgmt.Entity.Airport;
 import com.cg.flightmgmt.Entity.Flight;
@@ -17,6 +18,7 @@ import com.cg.flightmgmt.Exceptions.RecordAlreadyPresentException;
 import com.cg.flightmgmt.Exceptions.ScheduledFlightNotFoundException;
 import com.cg.flightmgmt.Repository.ScheduledFlightDao;
 
+@Service
 public class ScheduledFlightSevicesImpl implements ScheduleFlightServices{
 @Autowired
 ScheduledFlightDao scheduledFlightDao;
