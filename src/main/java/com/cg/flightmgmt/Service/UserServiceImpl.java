@@ -36,7 +36,8 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Users addUser(Users user)
 	{
-		if(Objects.nonNull(user.getUserId()))
+		Users userdb = userdao.findById(user.getUserId()).get();
+		if(Objects.nonNull(userdb))
 		{
 			throw new RecordAlreadyPresentException("The user is already present.");
 		}
