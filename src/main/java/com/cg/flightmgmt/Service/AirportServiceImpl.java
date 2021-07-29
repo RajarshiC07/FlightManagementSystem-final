@@ -39,9 +39,6 @@ public class AirportServiceImpl implements AirportService{
 			throw new AirportNotFoundException("Airport with airport code "+airportCode+" does not exists");
 	}
 	
-	/*
-	 * add airport
-	 */
 	public ResponseEntity<?> addAirport(Airport airport)
 	{
 		if(Objects.nonNull(airportDao.getById(airport.getAirportCode())))

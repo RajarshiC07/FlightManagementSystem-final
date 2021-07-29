@@ -35,7 +35,7 @@ public class AirportServiceTest {
 	    @MockBean
 	    private AirportDao airportDao;
 	    
-	  Airport airport;
+	    Airport airport;
 	    
 
 	    @BeforeEach
@@ -46,7 +46,7 @@ public class AirportServiceTest {
 	    
 	        Mockito.when(airportDao.save(airport)).thenReturn(airport);
 	        Mockito.when(airportDao.findAll()).thenReturn(list);
-	        Mockito.when(airportDao.findById("Kol")).thenReturn(Optional.of(airport));
+	        Mockito.when(airportDao.getById("Kol")).thenReturn(airport);
 	        doNothing().when(airportDao).deleteById("Kol");
 	    }
 
@@ -59,11 +59,12 @@ public class AirportServiceTest {
 	    }
 
 	    @Test
-	    @DisplayName("testing adding the airport")
+	    @DisplayName("testing adding the Airport")
 	    void addAirportTest()
 	    {
-	    	ResponseEntity<Airport> Ar=new ResponseEntity<Airport>(airport,HttpStatus.CREATED);
-	        assertEquals(Ar,airportService.addAirport(airport));
+	    	ResponseEntity ar=new ResponseEntity<Airport>(airport,HttpStatus.CREATED);
+	    	Mockito.when(airportDao.getById("Kol")).thenReturn(null);
+	        assertEquals(ar,airportService.addAirport(airport));
 	    }
 	    
 	    @Test
@@ -78,7 +79,8 @@ public class AirportServiceTest {
 	    @DisplayName("testing modifying the Airport")
 	    void modifyAirportTest()
 	    {
-	        assertEquals(airport,airportService.modifyAirport(airport));
+	    	
+	        assertEquals(ResponseEntity.ok(airport.getAirportCode()+" has been modified"),airportService.modifyAirport(airport));
 	    }
 	    
 }
