@@ -25,19 +25,27 @@ ScheduledFlightDao scheduledFlightDao;
 
 @Override
 public ScheduledFlight scheduleFlight(ScheduledFlight scheduledFlight) {
-	if(Objects.nonNull(scheduledFlightDao.getById(scheduledFlight.getScheduledFlightId())))
-		 throw new RecordAlreadyPresentException("The scheduledFlight with scheduledFlight id "+scheduledFlight.getScheduledFlightId()+" already exists");
+	if(Objects.isNull(scheduledFlightDao.findById(scheduledFlight.getScheduledFlightId()).orElse(null)))
+		return scheduledFlightDao.save(scheduledFlight);
+		
 	else
 	{	
-		scheduledFlightDao.save(scheduledFlight);
+		throw new RecordAlreadyPresentException("The scheduledFlight with scheduledFlight id "+scheduledFlight.getScheduledFlightId()+" already exists");
 	}
-		return scheduledFlight;
+		
 }
 
 @Override
 public List<ScheduledFlight> viewScheduledFlights(Airport sourceAirport,Airport destinationAirport, LocalDate date) {
-	
-	return null;
+	List<ScheduledFlight> list = new ArrayList<ScheduledFlight>();
+	List<ScheduledFlight> scheduledFlightList = new ArrayList<ScheduledFlight>();
+	list  = scheduledFlightDao.findAll();
+	for(int i = 0;i<list.size();i++)
+	{
+		if(list.get(i).getSchedule().getSourceAirport().getAirportCode().compareTo(sourceAirport.getAirportCode()) == 0 && list.get(i).getSchedule().getDestinationAirport().getAirportCode().compareTo(destinationAirport.getAirportCode()) == 0 && list.get(i).getSchedule().getDepartureTime().toLocalDate().equals(date))
+			scheduledFlightList.add(list.get(i));
+	}
+	return scheduledFlightList;
 }
 
 @Override
@@ -60,14 +68,9 @@ public List<ScheduledFlight> viewScheduledFlight() {
 }
 
 @Override
-public ScheduledFlight modifyScheduledFlight(Flight flight, Schedule schedule, Integer availableSeats) {
-	
-	
-	return null;
-}
 public ScheduledFlight modifyScheduledFlight(ScheduledFlight scheduledFlight)
 {
-	ScheduledFlight scheduledFlightDb = scheduledFlightDao.findById(scheduledFlight.getScheduledFlightId()).get(); 
+	ScheduledFlight scheduledFlightDb = scheduledFlightDao.findById(scheduledFlight.getScheduledFlightId()).orElse(null); 
 	if(Objects.isNull(scheduledFlightDb))
 		throw new ScheduledFlightNotFoundException("The scheduled Flight with scheduled Flight id "+scheduledFlight.getScheduledFlightId()+" does not exists");
 	else
@@ -82,9 +85,10 @@ public ScheduledFlight modifyScheduledFlight(ScheduledFlight scheduledFlight)
 	scheduledFlightDao.save(scheduledFlightDb);
 	return scheduledFlight;
 }
+
 @Override
 public void deleteScheduledFlight(BigInteger scheduledFlightId) {
-	ScheduledFlight scheduledFlightDb = scheduledFlightDao.findById(scheduledFlightId.intValue()).get(); 
+	ScheduledFlight scheduledFlightDb = scheduledFlightDao.findById(scheduledFlightId.intValue()).orElse(null); 
 	if(Objects.isNull(scheduledFlightDb))
 		throw new ScheduledFlightNotFoundException("The scheduled Flight with scheduled Flight id "+scheduledFlightId+" does not exists");
 	else
@@ -100,5 +104,7 @@ public void validateScheduledFlight(ScheduledFlight scheduledFlight) {
 		throw new ScheduledFlightNotFoundException("Invalid arrival and departure time");
 	if(arrivalTime.isBefore(currentTime) || departureTime.isBefore(currentTime))
 		throw new ScheduledFlightNotFoundException("Invalid arrival and departure time");	
-	}	
+	}
+
+
 }
