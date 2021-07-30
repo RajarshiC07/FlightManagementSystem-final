@@ -36,13 +36,13 @@ public ScheduledFlight scheduleFlight(ScheduledFlight scheduledFlight) {
 }
 
 @Override
-public List<ScheduledFlight> viewScheduledFlights(Airport sourceAirport,Airport destinationAirport, LocalDate date) {
+public List<ScheduledFlight> viewScheduledFlights(String sourceAirport,String destinationAirport,String date) {
 	List<ScheduledFlight> list = new ArrayList<ScheduledFlight>();
 	List<ScheduledFlight> scheduledFlightList = new ArrayList<ScheduledFlight>();
 	list  = scheduledFlightDao.findAll();
 	for(int i = 0;i<list.size();i++)
 	{
-		if(list.get(i).getSchedule().getSourceAirport().getAirportCode().compareTo(sourceAirport.getAirportCode()) == 0 && list.get(i).getSchedule().getDestinationAirport().getAirportCode().compareTo(destinationAirport.getAirportCode()) == 0 && list.get(i).getSchedule().getDepartureTime().toLocalDate().equals(date))
+		if(list.get(i).getSchedule().getSourceAirport().getAirportCode().compareTo(sourceAirport) == 0 && list.get(i).getSchedule().getDestinationAirport().getAirportCode().compareTo(destinationAirport) == 0 && list.get(i).getSchedule().getDepartureTime().toLocalDate().equals(LocalDate.parse(date)))
 			scheduledFlightList.add(list.get(i));
 	}
 	return scheduledFlightList;

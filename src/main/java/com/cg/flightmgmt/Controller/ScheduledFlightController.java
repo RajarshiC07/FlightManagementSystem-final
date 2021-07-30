@@ -32,7 +32,7 @@ public class ScheduledFlightController {
 	}
 	
 	@GetMapping("/scheduledFlights/{sourceAirport}/{destinationAirport}/{date}")
-	public ResponseEntity<?> viewScheduledFlight(@PathVariable("sourceAirport") Airport sourceAirport,@PathVariable("destinationAirport") Airport destinationAirport,@PathVariable("date") LocalDate date) {
+	public ResponseEntity<?> viewScheduledFlight(@PathVariable("sourceAirport") String sourceAirport,@PathVariable("destinationAirport") String destinationAirport,@PathVariable("date") String date) {
 		List<ScheduledFlight> list=scheduleFlightService.viewScheduledFlights(sourceAirport, destinationAirport, date);
 		return ResponseEntity.ok(list);
 	}

@@ -13,7 +13,7 @@ public interface ScheduleFlightServices {
 	
 public ScheduledFlight scheduleFlight(ScheduledFlight scheduledFlight ) ;
 
-public List<ScheduledFlight> viewScheduledFlights(Airport sourceAirport , Airport destinationAirport, LocalDate date);
+public List<ScheduledFlight> viewScheduledFlights(String sourceAirport , String destinationAirport, String date);
 
 public List<ScheduledFlight> viewScheduledFlights(BigInteger FlightId);
 
