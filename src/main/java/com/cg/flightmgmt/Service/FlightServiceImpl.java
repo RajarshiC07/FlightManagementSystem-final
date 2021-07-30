@@ -22,18 +22,24 @@ public class FlightServiceImpl implements FlightService {
 	@Override
 	public Flight addFlight(Flight flight) {
 		// TODO Auto-generated method stub
-		if(Objects.isNull(flight))
+		Flight flightDb = flightDao.findById(flight.getFlightNumber()).orElse(null);
+		System.out.println("Inside Add method");
+		if(Objects.nonNull(flightDb))
 		{
 			throw new RecordAlreadyPresentException("The Flight is already in the Database.");
 		}
-		else
-		return flightDao.save(flight);
+		else {
+			System.out.println("Flight Added;");
+			return flightDao.save(flight);
+			
+		}
+		
 	}
 
 	@Override
 	public Flight modifyFlight(Flight flight) {
 		// TODO Auto-generated method stub
-		Flight flightDb = flightDao.findById(flight.getFlightNumber()).get();
+		Flight flightDb = flightDao.findById(flight.getFlightNumber()).orElse(null);
 
 		if(Objects.isNull(flightDb)) {
 			throw new FlightNotFoundException("Flight is not avialable");
@@ -63,7 +69,7 @@ public class FlightServiceImpl implements FlightService {
 	    	throw new FlightNotFoundException("flight is not available");
 	    		}
 	    
-	    return flight.get();
+	    return flight.orElse(null);
 	
 	}
 	
@@ -76,9 +82,14 @@ public class FlightServiceImpl implements FlightService {
 	@Override
 	public void deleteFlight(BigInteger flightNumber) {
 		// TODO Auto-generated method stub
+		
+		if(Objects.isNull(flightDao.findById(flightNumber).orElse(null)))
+		{
+			throw new FlightNotFoundException("The Flight Number entered is not present.");
+		}
 		flightDao.deleteById(flightNumber);
 	}
-
+	
 	@Override
 	public void validateFlight(Flight flight) {
 		// TODO Auto-generated method stub
