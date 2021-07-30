@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Users addUser(Users user)
 	{
-		Users userdb = userdao.findById(user.getUserId()).get();
+		Users userdb = userdao.findById(user.getUserId()).orElse(null);
 		if(Objects.nonNull(userdb))
 		{
 			throw new RecordAlreadyPresentException("The user is already present.");
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Users updateUser(Users user)
 	{
-		Users userdb = userdao.findById(user.getUserId()).get();
+		Users userdb = userdao.findById(user.getUserId()).orElse(null);
 		
 		if(Objects.isNull(userdb))
 		{
@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void deleteUser(BigInteger userId)
 	{
-		if(Objects.isNull(userdao.getById(userId)))
+		if(Objects.isNull(userdao.findById(userId).orElse(null)))
 		{
 			throw new UserNotFoundException("The User Id entered is not present.");
 		}

@@ -25,7 +25,7 @@ public class BookingServiceImpl implements BookingService{
 	@Override
 	public Booking addBooking(Booking booking) {
 		
-		if(Objects.nonNull(bookingDao.getById(booking.getBookingId())))
+		if(Objects.nonNull(bookingDao.findById(booking.getBookingId()).orElse(null)))
 		{
 			throw new RecordAlreadyPresentException("Booking already done.");
 		}
@@ -37,7 +37,7 @@ public class BookingServiceImpl implements BookingService{
 	@Override
 	public Booking modifyBooking(Booking booking) {
 		
-		Booking book = bookingDao.findById(booking.getBookingId()).get();
+		Booking book = bookingDao.findById(booking.getBookingId()).orElse(null);
 		
 		if(Objects.isNull(book)) {
 			throw new BookingNotFoundException("Booking not available");
@@ -97,7 +97,7 @@ public class BookingServiceImpl implements BookingService{
 	@Override
 	public void deleteBooking(BigInteger bookingId)
 	{
-		if(Objects.isNull(bookingDao.getById(bookingId)))
+		if(Objects.isNull(bookingDao.findById(bookingId).orElse(null)))
 		{
 			throw new BookingNotFoundException("Booking not found");
 		}

@@ -63,13 +63,13 @@ public class FlightServiceImpl implements FlightService {
 	@Override
 	public Flight viewFlight(BigInteger flightNumber) {
 		// TODO Auto-generated method stub
-		Optional<Flight> flight = flightDao.findById(flightNumber);
-	    if(!flight.isPresent())
+		Flight flight = flightDao.findById(flightNumber).orElse(null);
+	    if(Objects.isNull(flight))
 	    		{
 	    	throw new FlightNotFoundException("flight is not available");
 	    		}
-	    
-	    return flight.orElse(null);
+	    else
+	    	return flight;
 	
 	}
 	

@@ -105,6 +105,4 @@ public void validateScheduledFlight(ScheduledFlight scheduledFlight) {
 	if(arrivalTime.isBefore(currentTime) || departureTime.isBefore(currentTime))
 		throw new ScheduledFlightNotFoundException("Invalid arrival and departure time");	
 	}
-
-
 }
