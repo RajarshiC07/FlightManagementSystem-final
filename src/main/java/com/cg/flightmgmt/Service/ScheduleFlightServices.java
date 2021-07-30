@@ -22,7 +22,7 @@ public List<ScheduledFlight> viewScheduledFlight();
 
 public ScheduledFlight modifyScheduledFlight(ScheduledFlight scheduledFlight);
 
-public void deleteScheduledFlight(BigInteger scheduledFlightId);
+public void deleteScheduledFlight(Integer scheduledFlightId);
 
 public void validateScheduledFlight(ScheduledFlight scheduledFlight);
 }

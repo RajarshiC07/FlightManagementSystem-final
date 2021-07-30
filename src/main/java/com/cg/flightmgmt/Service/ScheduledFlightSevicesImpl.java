@@ -1,7 +1,6 @@
 package com.cg.flightmgmt.Service;
 
 import java.math.BigInteger;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,18 +9,19 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.flightmgmt.Entity.Airport;
-import com.cg.flightmgmt.Entity.Flight;
-import com.cg.flightmgmt.Entity.Schedule;
 import com.cg.flightmgmt.Entity.ScheduledFlight;
 import com.cg.flightmgmt.Exceptions.RecordAlreadyPresentException;
 import com.cg.flightmgmt.Exceptions.ScheduledFlightNotFoundException;
+import com.cg.flightmgmt.Repository.ScheduleDao;
 import com.cg.flightmgmt.Repository.ScheduledFlightDao;
 
 @Service
 public class ScheduledFlightSevicesImpl implements ScheduleFlightServices{
 @Autowired
 ScheduledFlightDao scheduledFlightDao;
+
+@Autowired
+ScheduleDao scheduleDao;
 
 @Override
 public ScheduledFlight scheduleFlight(ScheduledFlight scheduledFlight) {
@@ -42,20 +42,20 @@ public List<ScheduledFlight> viewScheduledFlights(String sourceAirport,String de
 	list  = scheduledFlightDao.findAll();
 	for(int i = 0;i<list.size();i++)
 	{
-		if(list.get(i).getSchedule().getSourceAirport().getAirportCode().compareTo(sourceAirport) == 0 && list.get(i).getSchedule().getDestinationAirport().getAirportCode().compareTo(destinationAirport) == 0 && list.get(i).getSchedule().getDepartureTime().toLocalDate().equals(LocalDate.parse(date)))
+		if(list.get(i).getSchedule().getSourceAirport().getAirportCode().compareTo(sourceAirport) == 0 && list.get(i).getSchedule().getDestinationAirport().getAirportCode().compareTo(destinationAirport) == 0 && list.get(i).getSchedule().getDepartureTime().toLocalDate().equals(LocalDateTime.parse(date).toLocalDate()))
 			scheduledFlightList.add(list.get(i));
 	}
 	return scheduledFlightList;
 }
 
 @Override
-public List<ScheduledFlight> viewScheduledFlights(BigInteger scheduledFlightId) {
+public List<ScheduledFlight> viewScheduledFlights(BigInteger FlightId) {
 	List<ScheduledFlight> list = new ArrayList<ScheduledFlight>();
 	List<ScheduledFlight> scheduledFlightList = new ArrayList<ScheduledFlight>();
 	list  = scheduledFlightDao.findAll();
 	for(int i = 0;i<list.size();i++)
 	{
-		if(list.get(i).getFlight().getFlightNumber().compareTo(scheduledFlightId) == 0)
+		if(list.get(i).getFlight().getFlightNumber().compareTo(FlightId) == 0)
 			scheduledFlightList.add(list.get(i));
 	}
 	return scheduledFlightList;
@@ -87,12 +87,19 @@ public ScheduledFlight modifyScheduledFlight(ScheduledFlight scheduledFlight)
 }
 
 @Override
-public void deleteScheduledFlight(BigInteger scheduledFlightId) {
+public void deleteScheduledFlight(Integer scheduledFlightId) {
 	ScheduledFlight scheduledFlightDb = scheduledFlightDao.findById(scheduledFlightId.intValue()).orElse(null); 
+	System.out.println(scheduledFlightDb);
 	if(Objects.isNull(scheduledFlightDb))
 		throw new ScheduledFlightNotFoundException("The scheduled Flight with scheduled Flight id "+scheduledFlightId+" does not exists");
 	else
-		scheduledFlightDao.deleteById(scheduledFlightId.intValue());
+		{
+			scheduledFlightDb.setSchedule(null);
+			scheduledFlightDb.setFlight(null);
+			ScheduledFlight scheduledFlightDb2 = scheduledFlightDao.save(scheduledFlightDb);
+			System.out.println(scheduledFlightDb2);
+			scheduledFlightDao.deleteById(scheduledFlightId.intValue());
+		}
 }
 
 @Override
