@@ -23,7 +23,7 @@ public class FlightServiceImpl implements FlightService {
 	public Flight addFlight(Flight flight) {
 		// TODO Auto-generated method stub
 		Flight flightDb = flightDao.findById(flight.getFlightNumber()).orElse(null);
-		System.out.println("Inside Add method");
+		
 		if(Objects.nonNull(flightDb))
 		{
 			throw new RecordAlreadyPresentException("The Flight is already in the Database.");
