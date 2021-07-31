@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 import com.cg.flightmgmt.Entity.Users;
 @Repository("UserDao")
 public interface UserDao  extends JpaRepository<Users,BigInteger>{
-
+	public Users findByUserIdAndUserPassword(BigInteger userId,String userPassword);
 }

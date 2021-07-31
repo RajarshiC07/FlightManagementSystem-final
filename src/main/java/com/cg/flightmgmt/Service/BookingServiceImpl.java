@@ -150,9 +150,13 @@ public class BookingServiceImpl implements BookingService{
 		}
 		else 
 		{
-			booking.setScheduledFlight(null);
+			
+			ScheduledFlight scheduledFlight = booking.getScheduledFlight();
+			scheduledFlight.setAvailableSeats(scheduledFlight.getAvailableSeats()+booking.getNoOfPassangers());
+			scheduleFlightService.modifyScheduledFlight(scheduledFlight);
 			booking.setUserId(null);
 			booking.setPassengerList(null);
+			booking.setScheduledFlight(null);
 			bookingDao.save(booking);
 			bookingDao.deleteById(bookingId);
 		}

@@ -30,60 +30,101 @@ public class ScheduledFlightController {
 	@Autowired
 	private AirportService airportService; 
 	
-	public ScheduledFlight scheduledFlightGenerator(ScheduledFlightDTO scheduledFlightDto)
+	private ScheduledFlight scheduledFlightGenerator(ScheduledFlightDTO scheduledFlightDto)
 	{
-		ScheduledFlight scheduledFlight = new ScheduledFlight();
+				ScheduledFlight scheduledFlight = new ScheduledFlight();
 		
-		 Schedule schedule = new Schedule();
-		 schedule.setSourceAirport(airportService.viewAirport(scheduledFlightDto.getSourceAirportCode()));
-		 schedule.setDestinationAirport(airportService.viewAirport(scheduledFlightDto.getDestinationAirportCode()));
-		 schedule.setArrivalTime(LocalDateTime.parse(scheduledFlightDto.getArrivalTime()));
-		 schedule.setDepartureTime(LocalDateTime.parse(scheduledFlightDto.getDepartureTime()));
+				Schedule schedule = new Schedule();
+				schedule.setSourceAirport(airportService.viewAirport(scheduledFlightDto.getSourceAirportCode()));
+				schedule.setDestinationAirport(airportService.viewAirport(scheduledFlightDto.getDestinationAirportCode()));
+				schedule.setArrivalTime(LocalDateTime.parse(scheduledFlightDto.getArrivalTime()));
+				schedule.setDepartureTime(LocalDateTime.parse(scheduledFlightDto.getDepartureTime()));
 		
-		 scheduledFlight.setFlight(flightService.viewFlight(scheduledFlightDto.getFlightNumber()));
-		 scheduledFlight.setAvailableSeats(scheduledFlightDto.getAvailableSeats());
-		 scheduledFlight.setSchedule(schedule);
-		 scheduleFlightService.validateScheduledFlight(scheduledFlight);
-		 return scheduledFlight;
+				scheduledFlight.setFlight(flightService.viewFlight(scheduledFlightDto.getFlightNumber()));
+				scheduledFlight.setAvailableSeats(scheduledFlightDto.getAvailableSeats());
+				scheduledFlight.setSchedule(schedule);
+				scheduleFlightService.validateScheduledFlight(scheduledFlight);
+				return scheduledFlight;
 		
 	}
 	@PostMapping("/ScheduleOfFlights")
-	public ResponseEntity<?> scheduleFlight(@RequestBody ScheduledFlightDTO scheduledFlightDto) {
+	public ResponseEntity<?> scheduleFlight(@RequestBody ScheduledFlightDTO scheduledFlightDto)
+	{
 	
-		 ScheduledFlight scheduledFlight = scheduledFlightGenerator(scheduledFlightDto);
-		 ScheduledFlight scheduleFlight=scheduleFlightService.scheduleFlight(scheduledFlight);
-		 return ResponseEntity.ok(scheduleFlight);
+		if (UserServiceController.logValidator == 1) {
+			if (UserServiceController.UserType.equalsIgnoreCase("admin")) {
+				
+				ScheduledFlight scheduledFlight = scheduledFlightGenerator(scheduledFlightDto);
+				ScheduledFlight scheduleFlight=scheduleFlightService.scheduleFlight(scheduledFlight);
+				return ResponseEntity.ok(scheduleFlight);
+			} else
+				return ResponseEntity.ok("You don't have admin privileges");
+		} else
+			return ResponseEntity.ok("You have not logged in yet");
 	}
 	
 	@GetMapping("/scheduledFlights/{sourceAirport}/{destinationAirport}/{date}")
 	public ResponseEntity<?> viewScheduledFlight(@PathVariable("sourceAirport") String sourceAirport,@PathVariable("destinationAirport") String destinationAirport,@PathVariable("date") String date) {
-		List<ScheduledFlight> list=scheduleFlightService.viewScheduledFlights(sourceAirport, destinationAirport, date);
-		return ResponseEntity.ok(list);
+	
+		if (UserServiceController.logValidator == 1) 
+		{
+			List<ScheduledFlight> list=scheduleFlightService.viewScheduledFlights(sourceAirport, destinationAirport, date);
+			return ResponseEntity.ok(list);
+		} 
+		else
+			return ResponseEntity.ok("You have not logged in yet");
 	}
 	
-	@GetMapping("/viewFlightsByFlightNumber/{scheduledFlightId}")
-	public ResponseEntity<?> viewScheduledFlight(@PathVariable BigInteger scheduledFlightId) {
-		List<ScheduledFlight>list1=scheduleFlightService.viewScheduledFlights(scheduledFlightId);
-		return ResponseEntity.ok(list1);
+	@GetMapping("/viewFlightsByFlightNumber/{scheduledFlightNumber}")
+	public ResponseEntity<?> viewScheduledFlight(@PathVariable BigInteger scheduledFlightNumber) {
+		
+		if (UserServiceController.logValidator == 1) {
+			if (UserServiceController.UserType.equalsIgnoreCase("admin")) {
+				
+					List<ScheduledFlight>list1=scheduleFlightService.viewScheduledFlights(scheduledFlightNumber);
+					return ResponseEntity.ok(list1);
+			} else
+				return ResponseEntity.ok("You don't have admin privileges");
+		} else
+			return ResponseEntity.ok("You have not logged in yet");
 	}
 	
 	@GetMapping("/viewAllFlights")
 	public ResponseEntity<?> viewScheduledFlight() {
-		List<ScheduledFlight>list2= scheduleFlightService.viewScheduledFlight();
-		return ResponseEntity.ok(list2);
+		if (UserServiceController.logValidator == 1) 
+		{
+			List<ScheduledFlight>list2= scheduleFlightService.viewScheduledFlight();
+			return ResponseEntity.ok(list2);
+		} 
+		else
+			return ResponseEntity.ok("You have not logged in yet");
 	}
 	
 	@PutMapping("/modifyFlightsByScheduledFlightNumber")
 	public ResponseEntity<?> modifyScheduledFlight(@RequestBody ScheduledFlight scheduledFlight) {
-		
-		ScheduledFlight scheduleFlight= scheduleFlightService.modifyScheduledFlight(scheduledFlight);
-		return ResponseEntity.ok(scheduleFlight);
+		if (UserServiceController.logValidator == 1) {
+			if (UserServiceController.UserType.equalsIgnoreCase("admin")) {
+				
+				ScheduledFlight scheduleFlight= scheduleFlightService.modifyScheduledFlight(scheduledFlight);
+				return ResponseEntity.ok(scheduleFlight);
+			} else
+				return ResponseEntity.ok("You don't have admin privileges");
+		} else
+			return ResponseEntity.ok("You have not logged in yet");
+				
 	}
 
 	
 	@DeleteMapping("/deleteFlightsByFlightNumber/{scheduledFlightId}")
 	public ResponseEntity<?> deleteScheduledFlight(@PathVariable Integer scheduledFlightId) {
-		scheduleFlightService.deleteScheduledFlight(scheduledFlightId);
-		return ResponseEntity.ok("ScheduledFlight   "+ scheduledFlightId + "  deleted successfully");
+		if (UserServiceController.logValidator == 1) {
+			if (UserServiceController.UserType.equalsIgnoreCase("admin")) {
+		
+					scheduleFlightService.deleteScheduledFlight(scheduledFlightId);
+					return ResponseEntity.ok("ScheduledFlight   "+ scheduledFlightId + "  deleted successfully");
+		} else
+			return ResponseEntity.ok("You don't have admin privileges");
+	} else
+		return ResponseEntity.ok("You have not logged in yet");
 	}
 }

@@ -23,41 +23,69 @@ import com.cg.flightmgmt.Service.FlightService;
 @RestController
 public class FlightController {
 	private static final Logger logger = LoggerFactory.getLogger(FlightController.class);
-	
+
 	@Autowired
 	private FlightService flightService;
 
 	@PostMapping("/flight")
-	public ResponseEntity<?> addFlight(@RequestBody Flight flight)
-	{
-		return ResponseEntity.ok(flightService.addFlight(flight));
+	public ResponseEntity<?> addFlight(@RequestBody Flight flight) {
+		if (UserServiceController.logValidator == 1) {
+			if (UserServiceController.UserType.equalsIgnoreCase("admin")) {
+				return ResponseEntity.ok(flightService.addFlight(flight));
+			} else
+				return ResponseEntity.ok("You don't have admin privileges");
+		} else
+			return ResponseEntity.ok("You have not logged in yet");
 	}
-	
-@PutMapping("/flight")
-public ResponseEntity<?> modifyFlight(@RequestBody Flight flight)
-{
-	  return ResponseEntity.ok(flightService.modifyFlight(flight));
-}
-@GetMapping("/flight/{flightNumber}")
-public ResponseEntity<?> viewByFlightNumber(@PathVariable("flightNumber") BigInteger flightNumber)
-{
-	return ResponseEntity.ok(flightService.viewFlight(flightNumber));
-	
-}
-@GetMapping("/flight")
-public ResponseEntity<?> viewAllFlightts()
-{
-	logger.info("inside fetchAllFlights() of FlightController");
-	return ResponseEntity.ok(flightService.viewFlight());
-}
 
-@DeleteMapping("/flight/{flightNumber}")
-public ResponseEntity<?> deleteById(@PathVariable("flightNumber") BigInteger flightNumber)
-{
-	flightService.deleteFlight(flightNumber);
-	return  ResponseEntity.ok("flight - "  + flightNumber + " deleted successfully");
-}
+	@PutMapping("/flight")
+	public ResponseEntity<?> modifyFlight(@RequestBody Flight flight) {
 
-	
-}
+		if (UserServiceController.logValidator == 1) {
+			if (UserServiceController.UserType.equalsIgnoreCase("admin")) {
+				return ResponseEntity.ok(flightService.modifyFlight(flight));
+			} else
+				return ResponseEntity.ok("You don't have admin privileges");
+		} else
+			return ResponseEntity.ok("You have not logged in yet");
+	}
 
+	@GetMapping("/flight/{flightNumber}")
+	public ResponseEntity<?> viewByFlightNumber(@PathVariable("flightNumber") BigInteger flightNumber) {
+
+		if (UserServiceController.logValidator == 1) {
+			if (UserServiceController.UserType.equalsIgnoreCase("admin")) {
+				return ResponseEntity.ok(flightService.viewFlight(flightNumber));
+			} else
+				return ResponseEntity.ok("You don't have admin privileges");
+		} else
+			return ResponseEntity.ok("You have not logged in yet");
+	}
+
+	@GetMapping("/flight")
+	public ResponseEntity<?> viewAllFlightts() {
+		logger.info("inside fetchAllFlights() of FlightController");
+		if (UserServiceController.logValidator == 1) {
+			if (UserServiceController.UserType.equalsIgnoreCase("admin")) {
+				return ResponseEntity.ok(flightService.viewFlight());
+			} else
+				return ResponseEntity.ok("You don't have admin privileges");
+		} else
+			return ResponseEntity.ok("You have not logged in yet");
+	}
+
+	@DeleteMapping("/flight/{flightNumber}")
+	public ResponseEntity<?> deleteById(@PathVariable("flightNumber") BigInteger flightNumber) {
+
+		if (UserServiceController.logValidator == 1) {
+			if (UserServiceController.UserType.equalsIgnoreCase("admin")) {
+				flightService.deleteFlight(flightNumber);
+				return ResponseEntity.ok("flight - " + flightNumber + " deleted successfully");
+
+			} else
+				return ResponseEntity.ok("You don't have admin privileges");
+		} else
+			return ResponseEntity.ok("You have not logged in yet");
+	}
+
+}

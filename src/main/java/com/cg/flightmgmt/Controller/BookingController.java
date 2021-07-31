@@ -40,62 +40,107 @@ public class BookingController {
 	@PostMapping("/addBooking")
 	public ResponseEntity<?> addBooking(@RequestBody BookingDTO bookingDto)
 	{
-		ScheduledFlight scheduledFlight = scheduledFlightDao.findById(bookingDto.getScheduledFlightId()).orElse(null);
-		Users user = userService.viewUser(bookingDto.getUserId()); 
-		if(Objects.isNull(scheduledFlight))
-			throw new ScheduledFlightNotFoundException("No such scheduled flight present");
-		else if(!LocalDate.parse(bookingDto.getBookingDate()).equals(scheduledFlight.getSchedule().getArrivalTime().toLocalDate()))
-				return ResponseEntity.ok("Date is not available for this schedule");
-		else
+		if(UserServiceController.logValidator == 1)
 		{
-			Booking booking  = new Booking();
-			booking.setBookingId(BigInteger.valueOf(10));
-			booking.setBookingDate(LocalDate.parse(bookingDto.getBookingDate()));
-			booking.setScheduledFlight(scheduledFlight);
-			booking.setUserId(user);
-			return ResponseEntity.ok(bookingService.addBooking(booking));
+			ScheduledFlight scheduledFlight = scheduledFlightDao.findById(bookingDto.getScheduledFlightId()).orElse(null);
+			Users user = userService.viewUser(bookingDto.getUserId()); 
+			if(Objects.isNull(scheduledFlight))
+				throw new ScheduledFlightNotFoundException("No such scheduled flight present");
+			else if(!LocalDate.parse(bookingDto.getBookingDate()).equals(scheduledFlight.getSchedule().getArrivalTime().toLocalDate()))
+				return ResponseEntity.ok("Date is not available for this schedule");
+			else
+			{
+				Booking booking  = new Booking();
+				booking.setBookingId(BigInteger.valueOf(10));
+				booking.setBookingDate(LocalDate.parse(bookingDto.getBookingDate()));
+				booking.setScheduledFlight(scheduledFlight);
+				booking.setUserId(user);
+				return ResponseEntity.ok(bookingService.addBooking(booking));
+			}
 		}
+		else
+			return ResponseEntity.ok("You have not logged in yet");
 	}
 	@PostMapping("/addPassenger")
 	public ResponseEntity<?> addBooking(@RequestBody PassengerDTO passengerDto)
 	{
-		bookingService.validatePassenger(passengerDto);
-		Passenger passenger = new Passenger();
-		passenger.setPnrNumber(BigInteger.valueOf(10));
-		passenger.setPassengerName(passengerDto.getPassengerName());
-		passenger.setPassengerAge(passengerDto.getPassengerAge());
-		passenger.setPassengerUIN(passengerDto.getPassengerUIN());
-		passenger.setLuggage(Double.parseDouble((passengerDto.getLuggage().trim())));
-		return bookingService.addPassenger(passenger, passengerDto.getBookingId());
+		if(UserServiceController.logValidator == 1)
+		{
+			bookingService.validatePassenger(passengerDto);
+			Passenger passenger = new Passenger();
+			passenger.setPnrNumber(BigInteger.valueOf(10));
+			passenger.setPassengerName(passengerDto.getPassengerName());
+			passenger.setPassengerAge(passengerDto.getPassengerAge());
+			passenger.setPassengerUIN(passengerDto.getPassengerUIN());
+			passenger.setLuggage(Double.parseDouble((passengerDto.getLuggage().trim())));
+			return bookingService.addPassenger(passenger, passengerDto.getBookingId());
+		}
+		else
+			return ResponseEntity.ok("You have not logged in yet");
 	}
 	@GetMapping("/ConfirmBooking/{bookingId}")
 	public ResponseEntity<?> confirmBooking(@PathVariable BigInteger bookingId)
 	{
-		Booking booking = bookingService.finaliseBooking(bookingId);
-		return ResponseEntity.ok(booking);
+		if(UserServiceController.logValidator == 1)
+		{
+			Booking booking = bookingService.finaliseBooking(bookingId);
+			return ResponseEntity.ok(booking);
+		}
+			else
+				return ResponseEntity.ok("You have not logged in yet");
 	}
 
 	
 	@PutMapping("/modifyBooking")
 	public ResponseEntity<?> modifyBooking(@RequestBody Booking booking)
 	{
-		  return ResponseEntity.ok(bookingService.modifyBooking(booking));
+		if(UserServiceController.logValidator == 1)
+		{
+			if(UserServiceController.UserType.equalsIgnoreCase("admin"))
+			{
+				return ResponseEntity.ok(bookingService.modifyBooking(booking));
+			}
+			else
+				return ResponseEntity.ok("You don't have admin privileges");
+		}
+		else
+			return ResponseEntity.ok("You have not logged in yet");
 	}
 	@GetMapping("/viewAllBookings")
 	public ResponseEntity<?> viewAllBookings()
 	{
-		return ResponseEntity.ok(bookingService.viewBookingList());
+		if(UserServiceController.logValidator == 1)
+		{
+			if(UserServiceController.UserType.equalsIgnoreCase("admin"))
+			{
+				return ResponseEntity.ok(bookingService.viewBookingList());
+			}
+			else
+				return ResponseEntity.ok("You don't have admin privileges");
+		}
+		else
+			return ResponseEntity.ok("You have not logged in yet");
 	}
 	@GetMapping("/viewBooking/{userId}")
 	public ResponseEntity<?> viewBookingByUserId(@PathVariable("userId") BigInteger userId)
 	{
-		return ResponseEntity.ok(bookingService.viewBooking(userId));
+		if(UserServiceController.logValidator == 1)
+		{
+			return ResponseEntity.ok(bookingService.viewBooking(userId));
+		}
+		else
+			return ResponseEntity.ok("You have not logged in yet");
 		
 	}
 	@DeleteMapping("/deleteBookingById/{bookingId}")
 	public ResponseEntity<?> deleteBookingById(@PathVariable("bookingId") BigInteger bookingId)
 	{
-		bookingService.deleteBooking(bookingId);
-		return  ResponseEntity.ok("booking - "  + bookingId + " deleted successfully");
+		if(UserServiceController.logValidator == 1)
+		{
+			bookingService.deleteBooking(bookingId);
+			return  ResponseEntity.ok("booking - "  + bookingId + " deleted successfully");
+		}
+		else
+			return ResponseEntity.ok("You have not logged in yet");
 	}
 }

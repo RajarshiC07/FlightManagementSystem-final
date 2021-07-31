@@ -111,5 +111,13 @@ public class UserServiceImpl implements UserService{
 			throw new UserNotFoundException("The Email Address is invalid.");
 		}
 	}
+	public boolean loginDetails(BigInteger userId,String userPassword)
+	{
+		Users user = userdao.findByUserIdAndUserPassword(userId, userPassword);
+		if(Objects.nonNull(user))
+			return true;
+		else
+			return false;
+	}
 
 }

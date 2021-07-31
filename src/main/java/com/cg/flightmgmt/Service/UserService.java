@@ -18,4 +18,5 @@ public interface UserService {
 	
 	public void validateUser(Users user); 
 
+	public boolean loginDetails(BigInteger userId,String userPassword);
 }
