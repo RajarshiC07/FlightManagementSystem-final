@@ -1,0 +1,190 @@
+Controller Manual
+
+Controller    RestServiceType            Parameter             ExampleBodyIfAny
+
+Users		  PostMapping	          addUser					{
+									      						  "userType":"Admin",
+       															  "userId":35,
+        														  "userName":"Anwesha",
+        														  "userPassword":"ufxdc",
+        														  "userPhone" :7595075898,
+        									                      "userEmail":"anwesha@gmail.com"
+																}
+		      GetMapping		  viewbyId/{userId}	
+			
+		      GetMapping		  viewallUser		
+
+		      PutMapping		  updateUser					{
+									      						    "userType":"Admin",
+       														  	 	"userId":35,
+        															"userName":"Anwesha",
+        															"userPassword":"ufxdc",
+        															"userPhone" :7595075898,
+        															"userEmail":"anwesha@gmail.com"
+																}
+		      DeleteMapping		  deletebyId/{userId}	
+
+		      GetMapping		  Login/{userId}/{userPassword}
+			
+		      GetMapping		  Logout
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+ScheduledFlight	PostMapping		   ScheduleOfFlights        	{
+    																"flightNumber":12,
+    																"availableSeats":120,
+    																"sourceAirportCode":"A1",
+    																"destinationAirportCode":"A2",
+    																"arrivalTime":"2019-03-27T10:15:30",
+    																"departureTime":"2019-03-27T10:15:30"
+									   							 }
+
+		       GetMapping		   scheduledFlights/{sourceAirport}/{destinationAirport}/{Date}
+
+		       PutMapping		   modifyFlightByScheduledFlightNumber   {
+        																	"scheduledFlightId": 196,
+        																	"flight": {
+            																	"flightNumber": 12,
+            																	"carrierName": "atyc",
+            																	"flightModel": "cHAMPA",
+            																	"seatCapacity": 2000
+        										  							  },
+        																	"availableSeats": 117,
+        																	"schedule": {
+            																"scheduleId": 197,
+            																"sourceAirport": {
+                															"airportCode": "A1",
+                															"airportName": "Delhi Airport",
+                															"airportLocation": "Delhi"
+            											 					 },
+            																"destinationAirport": {
+                															"airportCode": "A2",
+                															"airportName": "Kolkata Airport",
+                															"airportLocation": "Kolkata"
+            																 },
+            																"arrivalTime": "2022-03-27T10:15:30",
+            																"departureTime": "2022-03-27T10:15:30"
+        																	}
+    											 							}
+ 		     
+		      GetMapping		 viewFlightsByFlightNumber/{scheduledFlightNumber}
+
+		      GetMapping		 viewAllFlights
+
+		      DeleteMapping		 deleteFlightsByFlightNumber/{scheduledFlightId}
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Flight		  PostMapping		  flight		 				{
+    																"flightNumber": 13,
+    																"carrierName": "atyc",
+    																"flightModel": "xyzajhasha",
+    																"seatCapacity": 2000
+											   					}
+
+		      PutMapping		  flight				  		 {
+    																	"flightNumber": 13,
+    																	"carrierName": "atyc",
+    																	"flightModel": "xyzajhasha",
+    																	"seatCapacity": 2000
+														 		  }
+
+		      GetMapping		   flight/{flightNumber}
+
+		      GetMapping      		   flight
+
+		      DeleteMapping		   flight/{flightNumber}
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Booking		  PostMapping		   addBooking				   {
+    															"userId":35,
+    															"bookingDate":"2022-03-27",
+    															"scheduledFlightId":196
+											  					 }
+
+		      PostMapping        	   addPassenger 			   {
+    																"bookingId":260,
+    																"passengerName":"Charan",
+    																"passengerAge":22,
+    																"passengerUIN":123456789123,
+    																"luggage":"12.39"
+																   }
+
+	   	      GetMapping	 	   ConfirmBooking/{bookingId}
+
+		      PutMapping      		   modifyBooking			   {
+    																"bookingId": 265,
+    																"userId": {
+        															"userType": "Admin",
+        															"userId": 35,
+        															"userName": "Anwesha",
+        															"userPassword": "ufxdc",
+        															"userPhone": 7595075898,
+        															"userEmail": "anwesha@gmail.com"
+    											   					 },
+    																"bookingDate": "2022-03-27",
+    																"passengerList": [
+        															{
+            															"pnrNumber": 266,
+            															"passengerName": "Charan",
+            															"passengerAge": 22,
+            															"passengerUIN": 123456789123,
+            															"luggage": 12.39
+        															}
+    																],
+    																"ticketCost": 100.0,
+    																"scheduledFlight": {
+        															"scheduledFlightId": 196,
+        															"flight": {
+            															"flightNumber": 12,
+            															"carrierName": "atyc",
+            															"flightModel": "cHAMPA",
+            															"seatCapacity": 2000
+        															  },
+        															"availableSeats": 116,
+        															"schedule": {
+            														"scheduleId": 197,
+            														"sourceAirport": {
+                													"airportCode": "A1",
+                													"airportName": "Delhi Airport",
+                													"airportLocation": "Delhi"
+            														},
+            														"destinationAirport": {
+                													"airportCode": "A2",
+                													"airportName": "Kolkata Airport",
+                													"airportLocation": "Kolkata"
+            														},
+            														"arrivalTime": "2022-03-27T10:15:30",
+            														"departureTime": "2022-03-27T10:15:30"
+        															}
+    																},
+    																"noOfPassangers": 1
+																	}
+
+		      	GetMapping		  viewAllBookings
+
+			GetMapping		  viewBooking/{userId}
+
+			DeleteMapping		  deleteBookingById/{bookingId}
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Airport		GetMapping		   viewAllAirports
+
+			GetMapping		   findAirport/{airportCode}
+			
+			PostMapping		   addAirport					{
+   																"airportCode":"A2",
+   																"airportName":"Kolkata Airport",
+   																"airportLocation":"Kolkata"
+															}
+
+			PutMapping		   modifyAirport				{
+   																"airportCode":"A2",
+   																"airportName":"Kolkata Airport",
+   																"airportLocation":"Kolkata"
+															}
+
+			DeleteMapping	  removeAirport/{airportCode}
+	
+
+
+		

@@ -34,8 +34,6 @@ public class AirportDaoTest {
 	
 	@Test
 	void saveAirportTest() {
-		
-		
 		assertEquals(airport, airportDao.save(airport));
 	}
 	

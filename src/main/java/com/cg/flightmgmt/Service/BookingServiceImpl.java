@@ -50,10 +50,9 @@ public class BookingServiceImpl implements BookingService{
 		{
 			validateBooking(bookingDb);
 			bookingDb.addPassenger(passenger,bookingDb.getPassengerList());
+			
 			bookingDb.setNoOfPassangers(bookingDb.getPassengerList().size());
 		
-			
-			
 			
 			bookingDao.save(bookingDb);
 			return ResponseEntity.ok("Passenger has been added");
@@ -69,7 +68,7 @@ public class BookingServiceImpl implements BookingService{
 		else
 		{
 			ScheduledFlight scheduledFlight = bookingDb.getScheduledFlight();
-			scheduledFlight.setAvailableSeats(scheduledFlight.getAvailableSeats()-1);
+			scheduledFlight.setAvailableSeats(scheduledFlight.getAvailableSeats()-bookingDb.getNoOfPassangers());
 			scheduleFlightService.modifyScheduledFlight(scheduledFlight);
 			
 			bookingDb.setTicketCost(BigDecimal.valueOf(100.00*bookingDb.getNoOfPassangers()));
@@ -154,9 +153,11 @@ public class BookingServiceImpl implements BookingService{
 			ScheduledFlight scheduledFlight = booking.getScheduledFlight();
 			scheduledFlight.setAvailableSeats(scheduledFlight.getAvailableSeats()+booking.getNoOfPassangers());
 			scheduleFlightService.modifyScheduledFlight(scheduledFlight);
+			
 			booking.setUserId(null);
 			booking.setPassengerList(null);
 			booking.setScheduledFlight(null);
+			
 			bookingDao.save(booking);
 			bookingDao.deleteById(bookingId);
 		}
