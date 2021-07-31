@@ -2,18 +2,21 @@ package com.cg.flightmgmt.Entity;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,6 +31,7 @@ import lombok.NoArgsConstructor;
 public class Booking {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name="booking_Id")
 	private BigInteger bookingId;
 	
@@ -36,10 +40,11 @@ public class Booking {
 	private Users userId;
 	
 	@Column(name="booking_Date")
-	private Date bookingDate;
+	private LocalDate bookingDate;
 	
 	@Builder.Default
-	@OneToMany(mappedBy="pnrNumber", targetEntity=Passenger.class, cascade=CascadeType.ALL)
+	@OneToMany(targetEntity = Passenger.class,cascade = CascadeType.ALL)
+	@JoinColumn(name = "booking_Id", referencedColumnName = "booking_Id")
 	private List <Passenger>passengerList = new ArrayList<Passenger>();
 	
 	@Column(name="ticket_Cost")
@@ -56,6 +61,10 @@ public class Booking {
 	{
 		passengerList.add(psngr);
 	}
-	
+	public void addPassenger(Passenger psngr,List<Passenger> psngrList)
+	{
+		this.passengerList = psngrList;
+		passengerList.add(psngr);
+	}
 	
 }

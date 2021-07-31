@@ -2,8 +2,8 @@ package com.cg.flightmgmt.Config;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -80,7 +80,7 @@ public class Config {
 	{
 		Booking booking = new Booking();
 		booking.setBookingId(new BigInteger("10"));
-		booking.setBookingDate(new Date());
+		booking.setBookingDate(LocalDate.now());
 		booking.setNoOfPassangers(200);
 		booking.setTicketCost(new BigDecimal("100.38"));
 		return booking;

@@ -30,6 +30,8 @@ public class UserServiceImpl implements UserService{
 	public Users viewUser(BigInteger userId)
 	{
 		Users user=userdao.findById(userId).orElse(null);
+		if(Objects.isNull(user))
+			throw new UserNotFoundException("No user present with user Id"+userId);
 		return user;
 	}
 	

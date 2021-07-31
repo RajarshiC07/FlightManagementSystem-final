@@ -4,6 +4,8 @@ import java.math.BigInteger;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,6 +22,7 @@ import lombok.NoArgsConstructor;
 public class Passenger {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="pnr_Number")
 	private BigInteger pnrNumber;
 	@Column(name="passenger_Name")
@@ -30,5 +33,4 @@ public class Passenger {
 	private BigInteger passengerUIN;
 	@Column(name="luggage")
 	private Double luggage;
-	
 }

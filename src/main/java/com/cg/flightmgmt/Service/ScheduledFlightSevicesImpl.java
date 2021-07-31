@@ -82,6 +82,7 @@ public ScheduledFlight modifyScheduledFlight(ScheduledFlight scheduledFlight)
 		if(Objects.nonNull(scheduledFlight.getAvailableSeats()))
 			scheduledFlightDb.setAvailableSeats(scheduledFlight.getAvailableSeats());
 	}
+	System.out.println("inside scheduled flight");
 	scheduledFlightDao.save(scheduledFlightDb);
 	return scheduledFlight;
 }
