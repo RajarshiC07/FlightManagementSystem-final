@@ -55,7 +55,8 @@ public class BookingController {
 				booking.setBookingDate(LocalDate.parse(bookingDto.getBookingDate()));
 				booking.setScheduledFlight(scheduledFlight);
 				booking.setUserId(user);
-				return ResponseEntity.ok(bookingService.addBooking(booking));
+				Booking bookingDb = bookingService.addBooking(booking);
+				return ResponseEntity.ok("Your booking has been added with booking id "+bookingDb.getBookingId());
 			}
 		}
 		else
@@ -84,7 +85,7 @@ public class BookingController {
 		if(UserServiceController.logValidator == 1)
 		{
 			Booking booking = bookingService.finaliseBooking(bookingId);
-			return ResponseEntity.ok(booking);
+			return ResponseEntity.ok("Your booking has been confirmed with booking id "+booking.getBookingId());
 		}
 			else
 				return ResponseEntity.ok("You have not logged in yet");

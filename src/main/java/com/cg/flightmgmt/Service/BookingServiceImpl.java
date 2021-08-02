@@ -65,6 +65,8 @@ public class BookingServiceImpl implements BookingService{
 		Booking bookingDb = bookingDao.findById(bookingId).orElse(null);
 		if(Objects.isNull(bookingDb))
 			throw new BookingNotFoundException("Booking not available");
+		else if(bookingDb.getNoOfPassangers() == 0)
+			throw new BookingNotFoundException("Booking cannot be confirmed as there are no passengers");
 		else
 		{
 			ScheduledFlight scheduledFlight = bookingDb.getScheduledFlight();
