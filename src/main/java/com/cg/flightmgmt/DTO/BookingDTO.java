@@ -1,7 +1,6 @@
 package com.cg.flightmgmt.DTO;
 
 import java.math.BigInteger;
-import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

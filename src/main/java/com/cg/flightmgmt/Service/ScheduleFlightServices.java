@@ -1,11 +1,7 @@
 package com.cg.flightmgmt.Service;
 import java.math.BigInteger;
-import java.time.LocalDate;
 import java.util.List;
 
-import com.cg.flightmgmt.Entity.Airport;
-import com.cg.flightmgmt.Entity.Flight;
-import com.cg.flightmgmt.Entity.Schedule;
 import com.cg.flightmgmt.Entity.ScheduledFlight;
 
 
@@ -19,6 +15,7 @@ public List<ScheduledFlight> viewScheduledFlights(BigInteger FlightId);
 
 public List<ScheduledFlight> viewScheduledFlight();
 
+public ScheduledFlight viewScheduledFlightById(Integer scheduledFlightId);
 
 public ScheduledFlight modifyScheduledFlight(ScheduledFlight scheduledFlight);
 

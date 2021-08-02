@@ -34,6 +34,14 @@ public ScheduledFlight scheduleFlight(ScheduledFlight scheduledFlight) {
 	}
 		
 }
+public ScheduledFlight viewScheduledFlightById(Integer scheduledFlightId)
+{
+	ScheduledFlight scheduledFlightDb = scheduledFlightDao.findById(scheduledFlightId).orElse(null); 
+	if(Objects.isNull(scheduledFlightDb))
+		throw new ScheduledFlightNotFoundException("The scheduled Flight with scheduled Flight id "+scheduledFlightId+" does not exists");
+	else
+		return scheduledFlightDb;
+}
 
 @Override
 public List<ScheduledFlight> viewScheduledFlights(String sourceAirport,String destinationAirport,String date) {

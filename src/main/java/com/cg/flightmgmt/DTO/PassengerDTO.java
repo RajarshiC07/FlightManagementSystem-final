@@ -1,10 +1,6 @@
 package com.cg.flightmgmt.DTO;
 
 import java.math.BigInteger;
-import java.time.LocalDate;
-
-import javax.persistence.Column;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -5,15 +5,15 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
+import com.cg.flightmgmt.DTO.BookingDTO;
 import com.cg.flightmgmt.DTO.PassengerDTO;
 import com.cg.flightmgmt.Entity.Booking;
-import com.cg.flightmgmt.Entity.Passenger;
 
 public interface BookingService {
 
-	public Booking addBooking(Booking booking);
+	public Booking addBooking(BookingDTO bookingDto);
 	
-	public ResponseEntity<?> addPassenger(Passenger passenger,BigInteger bookingId);
+	public ResponseEntity<?> addPassenger(PassengerDTO passengerDto);
 	
 	public Booking finaliseBooking(BigInteger bookingId);
 	

@@ -55,12 +55,6 @@ class BookingServiceTest {
 	}
 
 	@Test
-	@DisplayName("testing added new bookings")
-	void addBooking() {
-		assertEquals(booking , bookingService.addBooking(booking));
-	}
-
-	@Test
 	@DisplayName("testing updated booking")
 	void updateBooking() {
 		assertEquals(booking , bookingService.modifyBooking(booking));

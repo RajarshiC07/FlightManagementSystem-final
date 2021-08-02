@@ -11,12 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.cg.flightmgmt.DTO.BookingDTO;
 import com.cg.flightmgmt.DTO.PassengerDTO;
 import com.cg.flightmgmt.Entity.Booking;
 import com.cg.flightmgmt.Entity.Passenger;
 import com.cg.flightmgmt.Entity.ScheduledFlight;
+import com.cg.flightmgmt.Entity.Users;
 import com.cg.flightmgmt.Exceptions.BookingNotFoundException;
 import com.cg.flightmgmt.Exceptions.RecordAlreadyPresentException;
+import com.cg.flightmgmt.Exceptions.ScheduledFlightNotFoundException;
 import com.cg.flightmgmt.Repository.BookingDao;
 
 @Service
@@ -28,32 +31,51 @@ public class BookingServiceImpl implements BookingService{
 	@Autowired
 	ScheduleFlightServices scheduleFlightService;
 	
+	@Autowired
+	UserService userService;
+	
 	@Override
-	public Booking addBooking(Booking booking) {
-		
-		if(Objects.nonNull(bookingDao.findById(booking.getBookingId()).orElse(null)))
-		{
-			throw new RecordAlreadyPresentException("Booking already done.");
-		}
+	public Booking addBooking(BookingDTO bookingDto) {
+		ScheduledFlight scheduledFlight = scheduleFlightService.viewScheduledFlightById(bookingDto.getScheduledFlightId());
+		Users user = userService.viewUser(bookingDto.getUserId()); 
+		if(!LocalDate.parse(bookingDto.getBookingDate()).equals(scheduledFlight.getSchedule().getArrivalTime().toLocalDate()))
+			throw new  ScheduledFlightNotFoundException("Date is not available for this schedule");
 		else
-		return bookingDao.save(booking);
+		{
+			Booking booking  = new Booking();
+			booking.setBookingId(BigInteger.valueOf(10));
+			booking.setBookingDate(LocalDate.parse(bookingDto.getBookingDate()));
+			booking.setScheduledFlight(scheduledFlight);
+			booking.setUserId(user);
+			if(Objects.nonNull(bookingDao.findById(booking.getBookingId()).orElse(null)))
+			{
+				throw new RecordAlreadyPresentException("Booking already done.");
+			}
+			else
+				return bookingDao.save(booking);
+		}
 		
 	}	
-	public ResponseEntity<?> addPassenger(Passenger passenger,BigInteger bookingId)
+	public ResponseEntity<?> addPassenger(PassengerDTO passengerDto)
 	{
-		Booking bookingDb = bookingDao.findById(bookingId).orElse(null);
+		validatePassenger(passengerDto);
+		Booking bookingDb = bookingDao.findById(passengerDto.getBookingId()).orElse(null);
 		if(Objects.isNull(bookingDb))
 			throw new BookingNotFoundException("Booking not available");
 		else if(bookingDb.getTicketCost() != null)
 			return ResponseEntity.ok("Booking has already been finalised. Can't add any more passenger");
+	
 		else
 		{
 			validateBooking(bookingDb);
+			Passenger passenger = new Passenger();
+			passenger.setPnrNumber(BigInteger.valueOf(10));
+			passenger.setPassengerName(passengerDto.getPassengerName());
+			passenger.setPassengerAge(passengerDto.getPassengerAge());
+			passenger.setPassengerUIN(passengerDto.getPassengerUIN());
+			passenger.setLuggage(Double.parseDouble((passengerDto.getLuggage().trim())));
 			bookingDb.addPassenger(passenger,bookingDb.getPassengerList());
-			
 			bookingDb.setNoOfPassangers(bookingDb.getPassengerList().size());
-		
-			
 			bookingDao.save(bookingDb);
 			return ResponseEntity.ok("Passenger has been added");
 		}
@@ -67,12 +89,13 @@ public class BookingServiceImpl implements BookingService{
 			throw new BookingNotFoundException("Booking not available");
 		else if(bookingDb.getNoOfPassangers() == 0)
 			throw new BookingNotFoundException("Booking cannot be confirmed as there are no passengers");
+		else if(bookingDb.getTicketCost()!=null)
+			throw new BookingNotFoundException("this booking has already been confirmed");
 		else
 		{
 			ScheduledFlight scheduledFlight = bookingDb.getScheduledFlight();
 			scheduledFlight.setAvailableSeats(scheduledFlight.getAvailableSeats()-bookingDb.getNoOfPassangers());
 			scheduleFlightService.modifyScheduledFlight(scheduledFlight);
-			
 			bookingDb.setTicketCost(BigDecimal.valueOf(100.00*bookingDb.getNoOfPassangers()));
 			return bookingDao.save(bookingDb);
 		}
