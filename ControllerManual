@@ -12,7 +12,7 @@ Users		  PostMapping	          addUser					{
 																}
 		      GetMapping		  viewbyId/{userId}	
 			
-		      GetMapping		  viewallUser		
+		      GetMapping		  viewallUsers		
 
 		      PutMapping		  updateUser					{
 									      						    "userType":"Admin",
