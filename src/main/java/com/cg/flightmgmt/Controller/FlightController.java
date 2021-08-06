@@ -18,8 +18,7 @@ import com.cg.flightmgmt.Service.FlightService;
 
 @RestController
 public class FlightController {
-	private static final Logger logger = LoggerFactory.getLogger(FlightController.class);
-
+	
 	@Autowired
 	private FlightService flightService;
 
@@ -60,7 +59,7 @@ public class FlightController {
 
 	@GetMapping("/flight")
 	public ResponseEntity<?> viewAllFlightts() {
-		logger.info("inside fetchAllFlights() of FlightController");
+		
 		if (UserServiceController.logValidator == 1) {
 			if (UserServiceController.UserType.equalsIgnoreCase("admin")) {
 				return ResponseEntity.ok(flightService.viewFlight());

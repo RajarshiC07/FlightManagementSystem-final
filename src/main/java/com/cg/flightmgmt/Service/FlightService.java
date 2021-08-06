@@ -16,7 +16,4 @@ public interface FlightService {
 	public List<Flight> viewFlight();
 	
 	public void deleteFlight(BigInteger flightNumber);
-	
-	public void validateFlight(Flight flight);
-	
 }

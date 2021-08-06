@@ -35,18 +35,17 @@ public class UserServiceTest {
 	@BeforeEach
     void setUp() throws Exception
     {
-		users=Users.builder().userType("Admin").userId(BigInteger.valueOf(1L)).userName("Anwesha").userPassword("Qwerty").userPhone(BigInteger.valueOf(55L)).userEmail("an@gmail.com").build();
+		users=Users.builder().userType("Admin").userId(BigInteger.valueOf(20L)).userName("Anwesha").userPassword("Qwerty").userPhone(BigInteger.valueOf(55L)).userEmail("an@gmail.com").build();
 		List<Users> list = new ArrayList<Users>(){ {add(users);}};
         Mockito.when(userdao.save(users)).thenReturn(users);
         Mockito.when(userdao.findAll()).thenReturn(list);
-        Mockito.when(userdao.findById(BigInteger.valueOf(1L))).thenReturn(Optional.of(users));
+        Mockito.when(userdao.findById(BigInteger.valueOf(20L))).thenReturn(Optional.of(users));
     }
 	
 	@Test
     @DisplayName("testing adding the Users")
 	void addUserTest() {
-	       
-		System.out.println(userService.addUser(users));
+	 
 		assertEquals(users,userService.addUser(users));    
 	}
 	

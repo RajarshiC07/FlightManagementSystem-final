@@ -27,7 +27,6 @@ public class UserServiceController {
 	public ResponseEntity<?> addUser(@RequestBody Users user)
 	{
 		userService.validateUser(user);
-		System.out.println(user);
 		Users userdb= userService.addUser(user);
 		return ResponseEntity.ok(userdb);
 	}

@@ -89,10 +89,4 @@ public class FlightServiceImpl implements FlightService {
 		flightDao.deleteById(flightNumber);
 	}
 	
-	@Override
-	public void validateFlight(Flight flight) {
-		// TODO Auto-generated method stub
-
-	}
-
 }
