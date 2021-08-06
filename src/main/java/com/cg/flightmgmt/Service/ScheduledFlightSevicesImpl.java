@@ -106,9 +106,11 @@ public void deleteScheduledFlight(Integer scheduledFlightId) {
 		{
 			scheduledFlightDb.setSchedule(null);
 			scheduledFlightDb.setFlight(null);
+			scheduledFlightDb.setAvailableSeats(null);
 			ScheduledFlight scheduledFlightDb2 = scheduledFlightDao.save(scheduledFlightDb);
 			System.out.println(scheduledFlightDb2);
-			scheduledFlightDao.deleteById(scheduledFlightId.intValue());
+			
+			scheduledFlightDao.delete(scheduledFlightDb2);
 		}
 }
 
