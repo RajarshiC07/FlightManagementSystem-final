@@ -45,7 +45,7 @@ public class UserServiceTest {
 	@Test
     @DisplayName("testing adding the Users")
 	void addUserTest() {
-	 
+		Mockito.when(userdao.findById(BigInteger.valueOf(20L))).thenReturn(Optional.ofNullable(null));
 		assertEquals(users,userService.addUser(users));    
 	}
 	

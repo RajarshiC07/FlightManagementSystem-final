@@ -46,6 +46,7 @@ class FlightServiceTest {
 	    @DisplayName("testing adding the flight")
 	    void addFlightTest()
 	    {
+		 Mockito.when(flightDao.findById(BigInteger.valueOf(0L))).thenReturn(Optional.ofNullable(null));
 	        assertEquals(flight,flightService.addFlight(flight));
 	    }
 	 
