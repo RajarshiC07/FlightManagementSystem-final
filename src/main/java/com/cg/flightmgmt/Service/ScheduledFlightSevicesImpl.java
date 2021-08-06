@@ -1,6 +1,7 @@
 package com.cg.flightmgmt.Service;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public List<ScheduledFlight> viewScheduledFlights(String sourceAirport,String de
 	list  = scheduledFlightDao.findAll();
 	for(int i = 0;i<list.size();i++)
 	{
-		if(list.get(i).getSchedule().getSourceAirport().getAirportCode().compareTo(sourceAirport) == 0 && list.get(i).getSchedule().getDestinationAirport().getAirportCode().compareTo(destinationAirport) == 0 && list.get(i).getSchedule().getDepartureTime().toLocalDate().equals(LocalDateTime.parse(date).toLocalDate()))
+		if(list.get(i).getSchedule().getSourceAirport().getAirportCode().compareTo(sourceAirport) == 0 && list.get(i).getSchedule().getDestinationAirport().getAirportCode().compareTo(destinationAirport) == 0 && list.get(i).getSchedule().getDepartureTime().toLocalDate().equals(LocalDate.parse(date)))
 			scheduledFlightList.add(list.get(i));
 	}
 	return scheduledFlightList;
