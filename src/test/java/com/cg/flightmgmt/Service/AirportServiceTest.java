@@ -46,7 +46,7 @@ public class AirportServiceTest {
 	    
 	        Mockito.when(airportDao.save(airport)).thenReturn(airport);
 	        Mockito.when(airportDao.findAll()).thenReturn(list);
-	        Mockito.when(airportDao.getById("Kol")).thenReturn(airport);
+	        Mockito.when(airportDao.findById("Kol")).thenReturn(Optional.of(airport));
 	        doNothing().when(airportDao).deleteById("Kol");
 	    }
 
@@ -63,7 +63,7 @@ public class AirportServiceTest {
 	    void addAirportTest()
 	    {
 	    	ResponseEntity ar=new ResponseEntity<Airport>(airport,HttpStatus.CREATED);
-	    	Mockito.when(airportDao.getById("Kol")).thenReturn(null);
+	    	Mockito.when(airportDao.findById("Kol")).thenReturn(Optional.ofNullable(null));
 	        assertEquals(ar,airportService.addAirport(airport));
 	    }
 	    
