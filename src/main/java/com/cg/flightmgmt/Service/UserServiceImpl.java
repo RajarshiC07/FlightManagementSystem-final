@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Users addUser(Users user)
 	{
+		user.setUserId(BigInteger.valueOf(0));
 		Users userdb = userdao.findById(user.getUserId()).orElse(null);
 		if(Objects.nonNull(userdb))
 		{
@@ -111,13 +112,10 @@ public class UserServiceImpl implements UserService{
 			throw new UserNotFoundException("The Email Address is invalid.");
 		}
 	}
-	public boolean loginDetails(BigInteger userId,String userPassword)
+	public Users loginDetails(BigInteger userId,String userPassword)
 	{
 		Users user = userdao.findByUserIdAndUserPassword(userId, userPassword);
-		if(Objects.nonNull(user))
-			return true;
-		else
-			return false;
+		return user;
 	}
 
 }

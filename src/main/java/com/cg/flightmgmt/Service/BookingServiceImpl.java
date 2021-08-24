@@ -56,14 +56,14 @@ public class BookingServiceImpl implements BookingService{
 		}
 		
 	}	
-	public ResponseEntity<?> addPassenger(PassengerDTO passengerDto)
+	public Booking addPassenger(PassengerDTO passengerDto)
 	{
 		validatePassenger(passengerDto);
 		Booking bookingDb = bookingDao.findById(passengerDto.getBookingId()).orElse(null);
 		if(Objects.isNull(bookingDb))
 			throw new BookingNotFoundException("Booking not available");
 		else if(bookingDb.getTicketCost() != null)
-			return ResponseEntity.ok("Booking has already been finalised. Can't add any more passenger");
+			throw new BookingNotFoundException("No Passengers");
 	
 		else
 		{
@@ -76,12 +76,16 @@ public class BookingServiceImpl implements BookingService{
 			passenger.setLuggage(Double.parseDouble((passengerDto.getLuggage().trim())));
 			bookingDb.addPassenger(passenger,bookingDb.getPassengerList());
 			bookingDb.setNoOfPassangers(bookingDb.getPassengerList().size());
-			bookingDao.save(bookingDb);
-			return ResponseEntity.ok("Passenger has been added");
+			return bookingDao.save(bookingDb);
 		}
 			
 	}
 
+	public Booking viewBookingById(BigInteger BookingId)
+	{
+		return bookingDao.findById(BookingId).orElse(null);
+	}
+	
 	public Booking finaliseBooking(BigInteger bookingId)
 	{
 		Booking bookingDb = bookingDao.findById(bookingId).orElse(null);

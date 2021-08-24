@@ -13,7 +13,7 @@ public interface BookingService {
 
 	public Booking addBooking(BookingDTO bookingDto);
 	
-	public ResponseEntity<?> addPassenger(PassengerDTO passengerDto);
+	public Booking addPassenger(PassengerDTO passengerDto);
 	
 	public Booking finaliseBooking(BigInteger bookingId);
 	
@@ -28,4 +28,6 @@ public interface BookingService {
 	public void validateBooking(Booking booking);
 	
 	public void validatePassenger(PassengerDTO passengerDto);
+	
+	public Booking viewBookingById(BigInteger bookingId);
 }
