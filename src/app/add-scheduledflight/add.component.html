@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<div class="col-md-8 offset-md-3">
+    <h3>Add Scheduled Flight :- </h3>
+    <form (ngSubmit)= "onSubmit()">
+        <div class="form-group">
+            <label>Flight Number</label>
+            <input type="text" class="form-control" id="flightNumber"
+            [(ngModel)]="scheduledflightdto.flightNumber" name="flightNumber">
+        </div>
+        <div class="form-group">
+            <label>Available Seats</label>
+            <input type="number" class="form-control" id="availableSeats"
+            [(ngModel)]="scheduledflightdto.availableSeats" name="availableSeats">
+        </div>
+        <div class="form-group">
+            <label>Source Airport Code</label>
+            <input type="text" class="form-control" id="sourceAirportCode"
+            [(ngModel)]="scheduledflightdto.sourceAirportCode" name="sourceAirportCode">
+        </div>
+        <div class="form-group">
+            <label>Destination Airport Code</label>
+            <input type="text" class="form-control" id="destinationAirportCode"
+            [(ngModel)]="scheduledflightdto.destinationAirportCode" name="destinationAirportCode">
+        </div>
+        <div class="form-group">
+            <label>Arrival Time</label>
+            <input type="datetime" class="form-control" id="arrivalTime"
+            [(ngModel)]="scheduledflightdto.arrivalTime" name="arrivalTime">
+        </div>
+        <div class="form-group">
+            <label>Departure Time</label>
+            <input type="datetime" class="form-control" id="departureTime"
+            [(ngModel)]="scheduledflightdto.departureTime" name="departureTime">
+        </div>
+        <button class="btn btn-success" type="submit" (click)="onSubmit()">Add</button><br/><br/>
+        <button class="btn btn-primary" type="submit" (click)="home()">Home</button>
+    </form>
+</div>
+
+

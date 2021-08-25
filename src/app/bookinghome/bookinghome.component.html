@@ -1,0 +1,18 @@
+<div class = "colorstrip">
+  
+    &nbsp;<h1 class="text-center">Welcome to Booking Services {{userType}}</h1>
+    <div class = "lg"><button class = "btn btn-secondary" (click) = "home()">Home</button></div>
+    <br/>
+  </div>
+ <br/>
+ <br/><br/>
+ 
+    <div >
+     <!-- <button type="button" class="btn btn-primary btn-lg btn-block button2" ><a routerLink="home" routerLinkActive="active" class="nav-link" >Home</a></button> -->
+        <button type="button" (click)="addbooking()" class="btn btn-success btn-lg btn-block button1" ><a routerLink="addBooking" routerLinkActive="active" class="nav-link" >Add Booking</a></button>
+       <br/><br/> <button type="button" (click)="viewall()" class="btn btn-warning btn-lg btn-block button2"><a routerLink="viewAllBookings" routerLinkActive="active" class="nav-link" >View Booking</a></button>
+        
+    </div>
+    
+  
+ 

@@ -1,0 +1,23 @@
+<div class="col-md-6 offset-md-3">
+    <button (click)="home()" class="btn btn-success" type="button">Home</button>
+    <h3>Add Booking</h3>
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label>Enter User ID</label>
+            <input type="text" class="form-control" id="userId" [(ngModel)]="booking.userId" name="userId">
+        </div>
+        <div class="form-group">
+            <label>Enter Booking Date</label>
+            <input type="date" class="form-control" id="bookingDate" [(ngModel)]="booking.bookingDate" name="bookingDate">
+        </div>
+        <div class="form-group">
+            <label>Enter Scheduled Flight ID</label>
+            <input type="text" class="form-control" id="scheduledFlightId" [(ngModel)]="booking.scheduledFlightId" name="scheduledFlightId">
+        </div>
+        <br/>
+        <button (click)="onSubmit()" class="btn btn-success" type="submit">Submit</button><br/>
+        <h2>Booking done with Booking ID = {{b.bookingId}}. You may proceed to add Passenger</h2><br/>
+        <button (click)="goToaddPassenger()" class="btn btn-success" >Add Passenger</button>
+    </form>
+   
+    </div>

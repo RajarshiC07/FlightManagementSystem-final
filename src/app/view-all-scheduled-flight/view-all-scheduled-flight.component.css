@@ -1,0 +1,18 @@
+
+th{
+    font-size: 20px;
+    color:darkslategray;
+}
+
+td{
+    font-size: 20px;
+    color:darkblue;
+}
+
+.button1{
+    background-color:darkslategray;
+}
+
+.button2{
+    background-color: crimson;
+}

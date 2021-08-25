@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<div class = "colorstrip">
+  
+  &nbsp;<h1 class="text-center">Welcome to Booking Services</h1>
+  <div class = "lg"><button class = "btn btn-secondary" (click) = "home()">Home</button></div>
+  <br/>
+</div>
+
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+  <ul class="navbar=nav">
+  <button class="button1" style="margin-left:300px;" (click)="onclick()">
+    <li class="nav-item">
+      <a routerLink="ScheduledFlights" routerLinkActive="active" class="nav-link">Scheduled Flight List</a>
+    </li>
+    </button>
+    <button class="button2" style="margin:100px;"(click)="gotoAddSchedule()">
+    <li class="nav-item">
+      <a routerLink="addScheduleFlights" routerLinkActive="active" class="nav-link">Add Scheduled Flight</a>
+    </li>
+  </button><br>
+  <button class="button3" style="margin-left:300px;" (click)="gotoviewbyflightnumber()">
+    <li class="nav-item">
+      <a routerLink="viewScheduledFlightsByFlightNumber" routerLinkActive="active" class="nav-link">View Scheduled Flights by Flight Number</a>
+    </li>
+    </button>
+    <button class="button4" style="margin:100px;" (click)="gotoviewbyairport()">
+      <li class="nav-item">
+        <a routerLink="viewbyScheduledFlightsByAirport" routerLinkActive="active" class="nav-link">View Scheduled Flights by Airport</a>
+      </li>
+      </button>
+    </ul>
+  </nav>
+
+  
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+
+    <footer class="footer">
+      <div class="container">
+        <span>All Rights Reserved 2021 @Capgemini</span>
+      </div>
+    </footer>
+

@@ -1,0 +1,32 @@
+
+
+<div class = "colorstrip">
+  
+    &nbsp;<div class = "head">USER LIST </div>
+    <div class = "lg"><button class = "btn btn-secondary" (click) = "home()">Home</button></div>
+    <br/>
+  </div>
+
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>User Id</th>
+            <th>User Name</th>
+            <th>User Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{user.userId}}</td>
+            <td>{{user.userName}}</td>
+            <td>{{user.userType}}</td>
+            <td>
+              <button  class="btn btn-danger" (click) = "delete(user.userId)">Delete</button>
+              <button  class="btn btn-info" style="margin-left: 10px" (click) = "update(user.userId)">Update</button>
+              <button  class="btn btn-info" style="margin-left: 10px" (click) = "details(user.userId)">Details</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>

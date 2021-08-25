@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<div class="form-group">
+    <label> Enter Flight Number</label>
+    <input type="text" class="form-control" id="flightnumber"
+    [(ngModel)]="flightnumber" name="flightnumber"> 
+</div>
+
+<button (click)="onClick()"> Search </button>
+<table class="table table-striped">
+    <thead>
+        <th>Scheduled Flight ID</th>
+        <th>Flight Number</th>
+        <th>Carrier Name</th>
+        <th>Flight Model</th>
+        <th>Seat Capacity</th>
+        <th>Available Seats</th>
+        <th>Source Airport</th>
+        <th>Destination Airport</th>
+        <th>Arrival Time</th>
+        <th>Departure Time</th>
+    </thead>
+    <tbody>
+        <tr *ngFor= "let scheduledflight of scheduleflight">
+            <td>{{scheduledflight.scheduledFlightId}}</td>
+            <td>{{scheduledflight.flight.flightNumber}}</td>
+            <td>{{scheduledflight.flight.carrierName}}</td>
+            <td>{{scheduledflight.flight.flightModel}}</td>
+            <td>{{scheduledflight.flight.seatCapacity}}</td>
+            <td>{{scheduledflight.availableSeats}}</td>
+            <td>{{scheduledflight.schedule.sourceAirport.airportName}}</td>
+            <td>{{scheduledflight.schedule.destinationAirport.airportName}}</td>
+            <td>{{scheduledflight.schedule.arrivalTime}}</td>
+            <td>{{scheduledflight.schedule.departureTime}}</td>
+        </tr>
+    </tbody>
+    </table>

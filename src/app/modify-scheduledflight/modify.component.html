@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<div class="col=md-8 offset-md-3">
+    <h3>Modify Scheduled Flight :-</h3>
+    <form (ngSubmit) ="onSubmit()">
+        <div class="form-group">
+            <label>Scheduled Flight ID : </label>
+            <input type="number" class="form-control" id="scheduledFlightId"
+            [(ngModel)]="scheduledflight.scheduledFlightId" name="scheduledFlightId">
+        </div>
+        <div class="form-group">
+            <label>Carrier Name :</label>
+            <input type="text" class="form-control" id="carrierName"
+            [(ngModel)]="scheduledflight.flight.carrierName" name="carrierName">
+        </div>
+        <div class="form-group">
+            <label>Flight Model : </label>
+            <input type="text" class="form-control" id="flightModel"
+            [(ngModel)]="scheduledflight.flight.flightModel" name="flightModel">
+        </div>
+        <div class="form-group">
+            <label>Seat Capacity : </label>
+            <input type="text" class="form-control" id="seatCapacity"
+            [(ngModel)]="scheduledflight.flight.seatCapacity" name="seatCapacity">
+        </div>
+        <div class="form-group">
+            <label>Available Seats : </label>
+            <input type="number" class="form-control" id="availableSeats"
+            [(ngModel)]="scheduledflight.availableSeats" name="availableSeats">
+        </div>
+        <div class="form-group">
+            <label>Source Airport : </label>
+            <input type="text" class="form-control" id="sourceAirport"
+            [(ngModel)]="scheduledflight.schedule.sourceAirport.airportCode" name="sourceAirport">
+        </div>
+        <div class="form-group">
+            <label>Destination Airport : </label>
+            <input type="text" class="form-control" id="destinationAirport"
+            [(ngModel)]="scheduledflight.schedule.destinationAirport.airportCode" name="destinationAirport">
+        </div>
+        <div class="form-group">
+            <label>Arrival Time : </label>
+            <input type="text" class="form-control" id="arrivalTime"
+            [(ngModel)]="scheduledflight.schedule.arrivalTime" name="arrivalTime">
+        </div>
+        <div class="form-group">
+            <label>Departure Time : </label>
+            <input type="text" class="form-control" id="departureTime"
+            [(ngModel)]="scheduledflight.schedule.departureTime" name="departureTime">
+        </div> 
+        <button class="btn btn-success" type="submit" (click)="onSubmit()">Modify</button>
+    </form>
+</div>
+
+    

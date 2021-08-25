@@ -1,0 +1,21 @@
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class = "colorstrip">
+  
+  &nbsp;<div class = "head">WELCOME USER </div>
+    <div class = "lg"><button class = "btn btn-danger" (click) = "logout()">Logout</button></div>
+    <br/>
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary" (click) = "update()">UPDATE</button>&nbsp;
+        <button type="button" class="btn btn-danger" (click) = "delete()">DELETE</button>
+      </div>
+</div>
+<div class = "center">
+  <div class = "butdiv">
+    <br/>
+    <button class = "tabs" ><h2 class = "butab" (click) = "toScheduledFlight()">ScheduledFlights</h2></button>&nbsp;
+    <button class = "tabs" ><h2 class = "butab" (click) = "toBooking()">Bookings</h2></button>
+  </div>
+</div>

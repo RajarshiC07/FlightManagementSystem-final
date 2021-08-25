@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<h3>Scheduled Flight List: </h3>
+<table class="table table-striped">
+    <thead>
+        <th>Scheduled Flight ID</th>
+        <th>Flight Number</th>
+        <th>Carrier Name</th>
+        <th>Flight Model</th>
+        <th>Seat Capacity</th>
+        <th>Available Seats</th>
+        <th>Source Airport</th>
+        <th>Destination Airport</th>
+        <th>Arrival Time</th>
+        <th>Departure Time</th>
+        <th>Actions</th>
+    </thead>
+    <tbody>
+        <tr *ngFor= "let scheduledflight of scheduledflights">
+            <td>{{scheduledflight.scheduledFlightId}}</td>
+            <td>{{scheduledflight.flight.flightNumber}}</td>
+            <td>{{scheduledflight.flight.carrierName}}</td>
+            <td>{{scheduledflight.flight.flightModel}}</td>
+            <td>{{scheduledflight.flight.seatCapacity}}</td>
+            <td>{{scheduledflight.availableSeats}}</td>
+            <td>{{scheduledflight.schedule.sourceAirport.airportName}}</td>
+            <td>{{scheduledflight.schedule.destinationAirport.airportName}}</td>
+            <td>{{scheduledflight.schedule.arrivalTime}}</td>
+            <td>{{scheduledflight.schedule.departureTime}}</td>
+            
+            <td>
+                <button class="button1" (click) = "modifyScheduledFlights(scheduledflight.scheduledFlightId)" class="btn btn-info" style="margin-left: 10px">Modify</button>
+                <button class="button2" (click) = "deleteScheduledFlights(scheduledflight.scheduledFlightId)" class="btn btn-info" style="margin-left: 10px">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

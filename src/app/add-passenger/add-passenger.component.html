@@ -1,0 +1,31 @@
+<div class="col-md-6 offset-md-3">
+    <h3>Add Passenger</h3>
+    <form >
+        <div class="form-group">
+            <label>Enter Booking ID </label>
+            <input type="text" class="form-control" id="bookingId" [(ngModel)]="passenger.bookingId" name="bookingId">
+        </div>
+        <div class="form-group">
+            <label>Enter Passenger Name</label>
+            <input type="text" class="form-control" id="passengerName" [(ngModel)]="passenger.passengerName" name="passengerName">
+        </div>
+        <div class="form-group">
+            <label>Enter Passenger Age</label>
+            <input type="text" class="form-control" id="passengerAge" [(ngModel)]="passenger.passengerAge" name="passengerAge">
+        </div>
+        <div class="form-group">
+            <label>Enter Passenger UIN</label>
+            <input type="text" class="form-control" id="passengerUIN" [(ngModel)]="passenger.passengerUIN" name="passengerUIN">
+        </div>
+        <div class="form-group">
+            <label>Enter Luggage</label>
+            <input type="text" class="form-control" id="luggage" [(ngModel)]="passenger.luggage" name="luggage">
+        </div>
+        <br/>
+        <button (click)="gotobooking()" class="btn btn-success" type="button">Back</button>
+        <button (click)="onSubmit()" class="btn btn-success" type="submit" >Add</button>
+        
+        <button class="btn btn-success" type="button" (click)=" goToConfirm()">Next</button>
+        
+    </form>
+    </div>

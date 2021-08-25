@@ -1,0 +1,25 @@
+<h2>Flight List</h2>
+<br />
+<br />
+<table class="table table-striped">
+    <thead>
+        <th>Flight Number</th>
+        <th>Flight Carrier Name</th>
+        <th>Operations</th>
+    </thead>
+    <tbody>
+        <tr *ngFor= "let flight of flights">
+            <td>{{flight.flightNumber}}</td>
+            <td>{{flight.carrierName}}</td>
+            
+            <td>
+                <button (click) = "modifyFlight(flight.flightNumber)" class="btn btn-info">Modify</button>
+                <button (click) = "deleteFlight(flight.flightNumber)" class="btn btn-danger" style="margin-left: 10px">Delete</button>
+                <button (click) = "viewFlight(flight.flightNumber)" class="btn btn-info" style="margin-left: 10px">View</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div>
+<button (click) = "goToHome()" class="btn btn-info">Go To Home</button>
+</div>

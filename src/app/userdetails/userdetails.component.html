@@ -1,0 +1,34 @@
+<div class = "colorstrip">
+  <div class = "rg"><button class = "btn btn-secondary" (click) = "back()">Back</button></div>
+  &nbsp;<div class = "head">User Details</div>
+    <div class = "lg"><button class = "btn btn-secondary" (click) = "home()">Home</button></div>
+    <br/>
+  </div>
+
+
+<hr/>
+
+<div *ngIf="user">
+  <div class = "block">
+  <div>
+    <label><b>User ID:</b></label> {{user.userId}}
+  </div>
+  <div>
+    <label><b>User Name: </b></label> {{user.userName}}
+  </div>
+  <div>
+    <label><b>User Password: </b></label> {{user.userPassword}}
+  </div>
+  <div>
+    <label><b>User Email: </b></label> {{user.userEmail}}
+  </div>
+  <div>
+    <label><b>User Phone: </b></label> {{user.userPhone}}
+  </div>
+  <div>
+    <label><b>User Type: </b></label> {{user.userType}}
+  </div>
+</div>
+</div>
+<br>
+<br>

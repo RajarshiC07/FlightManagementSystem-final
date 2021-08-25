@@ -1,0 +1,49 @@
+
+<link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div id = "outside">
+<div class = "center">
+	<fieldset>
+		<legend style= "text-align: center;">Login</legend>
+	<table align = "center">
+	 <tr>
+	  <td>
+		<div>
+		   <label>User-Id</label><br/>
+		</div>
+	  </td>
+	  </tr>
+	  <tr>
+	  <td>
+		<div>
+			<i class="fa fa-id-card" style="font-size:24px;"></i>&nbsp;<input [(ngModel)] = "userId" type = "text" size = "50" placeholder="Enter your UserId"/><br/>
+		</div>
+	  </td>
+	 </tr>
+	 <tr><td colspan="2">&nbsp;</td></tr>
+	 <tr>
+	   <td>
+		<div>
+		   <label>Password</label><br/>
+		</div>
+		</td>
+		</tr>
+		<tr>
+		<td>
+		  <div>
+			<i class="fa fa-lock" style="font-size:24px;"></i> &nbsp; &nbsp;<input [(ngModel)] = "password" type = "password" size = "50" placeholder="Enter your Password"/><br/>
+		   </div>
+	  </td>
+  </tr>
+</table>
+		<br/><br/>
+		<div class = "center1"> <button (click) = "login()" class = "btn btn-primary btn-lg btn-block" [ngClass]="{'btn btn-danger':(validity == 1), 'btn btn-primary':(validity == 0)} " >{{message}}</button> &nbsp;
+	 	<button (click) = "goToRegister()"  class = "btn btn-primary btn-lg">Register</button><br/></div>  
+		 <br/>
+		<!-- <div  {[ngClass]="{'alert alert-light' : (validity == 0), 'alert alert-danger':(validity == 1)}"  role="alert">
+			{{message}}
+		  </div> -->
+ 
+</fieldset>
+  </div>
+</div>

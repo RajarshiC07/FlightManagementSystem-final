@@ -1,0 +1,42 @@
+<div class = "right">
+  <div class = "lg"><button class = "btn btn-secondary" (click) = "home()">Home</button></div>
+</div>
+
+
+<div class = "center">
+<h3>Update User </h3>
+<div style="width: 400px;">
+    <div class="form-group">
+      <label for="name">User ID</label>
+      <input type="text" class="form-control" id="bookingId" required [(ngModel)]="user.userId" name="userId">
+    </div>
+
+    <div class="form-group">
+      <label for="name">UserName</label>
+      <input type="text" class="form-control" id="userName" required [(ngModel)]="user.userName" name="lastName">
+    </div>
+
+    <div class="form-group">
+      <label for="name">UserPassword</label>
+      <input type="password" class="form-control" id="userPassword" required [(ngModel)]="user.userPassword" name="userPassword">
+    </div>
+
+    <div class="form-group">
+        <label for="name">UserPhone</label>
+        <input type="text" class="form-control" id="userPhone" required [(ngModel)]="user.userPhone" name="userPhone">
+      </div>
+
+      <div class="form-group">
+        <label for="name">UserEmail</label>
+        <input type="email" class="form-control" id="UserEmail" required [(ngModel)]="user.userEmail" name="userEmail">
+      </div>
+      <div class="form-group">
+        <label for="name">UserType</label>
+        <input type="text" class="form-control" id="UserType" required [(ngModel)]="user.userType" name="userType">
+      </div>
+      <br/>
+
+    <button type="submit" class="btn btn-success" (click) = "submit()">Submit</button>
+  
+</div>
+</div>

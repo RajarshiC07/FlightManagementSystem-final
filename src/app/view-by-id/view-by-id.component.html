@@ -1,0 +1,65 @@
+<div><button (click)="home()" class="btn btn-success" type="button">Back</button><br/>
+<label >Booking ID :{{booking.bookingId}}</label><br/>
+<label>User ID :{{booking.userId.userId}}</label><br/>
+<label>Booking Date :{{booking.bookingDate}}</label><br/>
+<label>Passengers List:</label>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">UIN</th>
+        <th scope="col">Luggage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of booking.passengerList">
+        <td>{{p.pnrNumber}}</td>
+        <td>{{p.passengerName}}</td>
+        <td>{{p.passengerAge}}</td>
+        <td>{{p.passengerUIN}}</td>
+        <td>{{p.luggage}}</td>
+      </tr>
+      
+    </tbody>
+  </table><br/>
+  <label>Ticket Cost :{{booking.ticketCost}}</label><br/>
+  <label>Scheduled Flight ID :{{booking.scheduledFlight.scheduledFlightId}}</label><br/>
+  <label>Flight No. :{{booking.scheduledFlight.flight.flightNumber}}</label><br/>
+  <label>Carrier Name :{{booking.scheduledFlight.flight.carrierName}}</label><br/>
+  <label>Flight Model :{{booking.scheduledFlight.flight.flightModel}}</label><br/>
+  <label>Seat Capacity :{{booking.scheduledFlight.flight.seatCapacity}}</label><br/>
+  <label>Available Seats :{{booking.scheduledFlight.availableSeats}}</label><br/>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Schedule</th>
+        <th scope="col">Airport Code</th>
+        <th scope="col">Airport Name</th>        
+        <th scope="col">Airport Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Source Airport</th>
+        <td>{{booking.scheduledFlight.schedule.sourceAirport.airportCode}}</td>
+        <td>{{booking.scheduledFlight.schedule.sourceAirport.airportName}}</td>
+        <td>{{booking.scheduledFlight.schedule.sourceAirport.airportLocation}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Destination Airport</th>
+        <td>{{booking.scheduledFlight.schedule.destinationAirport.airportCode}}</td>
+        <td>{{booking.scheduledFlight.schedule.destinationAirport.airportName}}</td>
+        <td>{{booking.scheduledFlight.schedule.destinationAirport.airportLocation}}</td>
+      </tr>      
+    </tbody>
+  </table> <br/>
+ <label>Arrival Time :{{booking.scheduledFlight.schedule.arrivalTime}}</label><br/>
+ <label>Departure Time :{{booking.scheduledFlight.schedule.departureTime}}</label><br/>
+ <label>No. of Passengers :{{booking.noOfPassengers}}</label><br/>
+ <br/>
+ <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group mr-2" role="group" aria-label="First group">
+ 
+</div></div> <br/></div>

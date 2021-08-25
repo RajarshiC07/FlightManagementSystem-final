@@ -1,0 +1,20 @@
+<h3>View Flight Details</h3>
+<br />
+<br />
+<div>
+    <div>
+        <label><b>Flight Number: </b></label> {{flight.flightNumber}}
+    </div>
+    <div>
+        <label><b>Carrier Name: </b></label> {{flight.carrierName}}
+    </div>
+    <div>
+        <label><b>Flight Model: </b></label> {{flight.flightModel}}
+    </div>
+    <div>
+        <label><b>Seat Capacity: </b></label> {{flight.seatCapacity}}
+    </div>
+</div>
+
+<br />
+<button (click)="goToFlightList()" class="btn btn-primary">Back to Flight List</button>

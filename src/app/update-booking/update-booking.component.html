@@ -1,0 +1,79 @@
+<div><button (click)="home()" class="btn btn-success" type="button">Back</button>
+<form><label >Booking ID :</label>
+<input type="text" id="bookingId" [(ngModel)]="booking.bookingId" name="bookingId"><br/>
+<label>User ID :</label>
+<input type="text" id="userId" [(ngModel)]="booking.userId.userId" name="userId"><br/>
+<label>Booking Date :</label>
+<input type="date" id="bookingDate" [(ngModel)]="booking.bookingDate" name="bookingDate"><br/>
+<label>Passengers List:</label>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">UIN</th>
+        <th scope="col">Luggage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of booking.passengerList">
+        <td><input type="text" id="pnrNumber" [(ngModel)]="p.pnrNumber" name="pnrNumber"></td>
+        <td><input type="text" id="passengerName" [(ngModel)]="p.passengerName" name="passengerName"></td>
+        <td><input type="text" id="passengerAge" [(ngModel)]="p.passengerAge" name="passengerAge"></td>
+        <td><input type="text" id="passengerUIN" [(ngModel)]="p.passengerUIN" name="passengerUIN"></td>
+        <td><input type="text" id="luggage" [(ngModel)]="p.luggage" name="luggage"></td>
+      </tr>
+      
+    </tbody>
+  </table><br/>
+  <label>Ticket Cost :</label>
+  <input type="text" id="ticketCost" [(ngModel)]="booking.ticketCost" name="ticketCost"><br/>
+  <label>Scheduled Flight ID :</label>
+  <input type="text" id="scheduledFlightId" [(ngModel)]="booking.scheduledFlight.scheduledFlightId" name="scheduledFlightId"><br/>
+  <label>Flight No. :</label>
+  <input type="text" id="flightNumber" [(ngModel)]="booking.scheduledFlight.flight.flightNumber" name="flightNumber"><br/>
+  <label>Carrier Name :</label>
+  <input type="text" id="carrierName" [(ngModel)]="booking.scheduledFlight.flight.carrierName" name="carrierName"><br/>
+  <label>Flight Model :</label>
+  <input type="text" id="flightModel" [(ngModel)]="booking.scheduledFlight.flight.flightModel" name="flightModel"><br/>
+  <label>Seat Capacity :</label>
+  <input type="text" id="seatCapacity" [(ngModel)]="booking.scheduledFlight.flight.seatCapacity" name="seatCapacity"><br/>
+  <label>Available Seats :</label>
+  <input type="text" id="availableSeats" [(ngModel)]="booking.scheduledFlight.availableSeats" name="availableSeats"><br/>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Schedule</th>
+        <th scope="col">Airport Code</th>
+        <th scope="col">Airport Name</th>        
+        <th scope="col">Airport Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Source Airport</th>
+        <td><input type="text" id="airportCode" [(ngModel)]="booking.scheduledFlight.schedule.sourceAirport.airportCode" name="airportCode"></td>
+        <td><input type="text" id="airportName" [(ngModel)]="booking.scheduledFlight.schedule.sourceAirport.airportName" name="airportName"></td>
+        <td><input type="text" id="airportLocation" [(ngModel)]="booking.scheduledFlight.schedule.sourceAirport.airportLocation" name="airportLocation"></td>
+      </tr>
+      <tr>
+        <th scope="row">Destination Airport</th>
+        <td><input type="text" id="airportCode" [(ngModel)]="booking.scheduledFlight.schedule.destinationAirport.airportCode" name="airportCode"></td>
+        <td><input type="text" id="airportName" [(ngModel)]="booking.scheduledFlight.schedule.destinationAirport.airportName" name="airportName"></td>
+        <td><input type="text" id="airportLocation" [(ngModel)]="booking.scheduledFlight.schedule.destinationAirport.airportLocation" name="airportLocation"></td>
+      </tr>      
+    </tbody>
+  </table> <br/>
+ <label>Arrival Time :</label>
+ <input type="text" id="arrivalTime" [(ngModel)]="booking.scheduledFlight.schedule.arrivalTime" name="arrivalTime"><br/>
+ <label>Departure Time :</label>
+ <input type="text" id="departureTime" [(ngModel)]="booking.scheduledFlight.schedule.departureTime" name="departureTime"><br/>
+ <label>No. of Passengers :</label>
+ <input type="text" id="noOfPassengers" [(ngModel)]="booking.noOfPassengers" name="noOfPassengers"><br/>
+ <br/>
+ <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group mr-2" role="group" aria-label="First group">
+ <button type="button" (click)="updateBooking()"  class="btn btn-secondary btn-lg btn-block button2">Done</button>
+ 
+</div></div> <br/></form></div>

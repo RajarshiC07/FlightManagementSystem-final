@@ -1,0 +1,24 @@
+<div><button (click)="home()" class="btn btn-success" type="button">Home</button>
+<h2> Booking List</h2>
+<table class = "table table-striped">
+    <thead>
+        <tr>
+            <th> Booking ID</th>
+            <th> User Name </th>
+            <th> Actions </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let items of bookings" >
+            <td> {{items.bookingId}} </td>
+            <td> {{ items.userId.userName }} </td>
+            <td>
+              <button  (click)="updateBooking(items.bookingId)"  class="btn btn-info" style="margin-left: 10px">Update</button>
+              <button  (click)="deleteBooking(items.bookingId)"class="btn btn-danger" style="margin-left: 10px">Delete</button>
+              <button (click) = "bookingDetails(items.bookingId)" class = "btn btn-info" style="margin-left: 10px"> View</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+

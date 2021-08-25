@@ -1,0 +1,23 @@
+<div [hidden]="updated" style="width: 400px; margin-left: auto;margin-right: auto;">
+    <h3>Update Airport</h3>
+    <form (ngSubmit)= "onSubmit()">
+   
+    <div class="form-group">
+        <label>Airport Name</label>
+        <input type="text" class="form-control" id="airportName" [(ngModel)]="airport.airportName" name="airportName">
+    </div>
+    <div class="form-group">
+        <label>Airport Location</label>
+        <input type="text" class="form-control" id="airportLocation" [(ngModel)]="airport.airportLocation" name="airportLocation">
+    </div>
+    
+    <button class="btn btn-success" type="submit" (click)="onSubmit()"> Submit</button>
+    </form>
+    </div>
+    <div [hidden]="!updated">
+        <h4>You updated successfully!</h4>
+      </div>
+      <br>
+      <br>
+      <button (click)="goToAirportList()" class="btn btn-primary">Back to Airport List</button>
+    

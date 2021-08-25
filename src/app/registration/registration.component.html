@@ -1,0 +1,52 @@
+<div class = "outer">
+<div class = "center">
+
+<legend>Register User</legend>
+<div style="width: 400px;">
+  <form [formGroup] = "nameForm">
+      <div class="form-group">
+         <label for="name">User Name</label>
+        <input [class.is-invalid] = "nameForm.touched && nameForm.invalid"  type="text"  class="form-control" formControlName = "userName" placeholder="Enter your full name">
+         <small [class.d-none] = "nameForm.untouched || nameForm.valid">Name should be atleast 3 characters</small>
+      </div>
+  </form>
+        <br/>
+        <form [formGroup] = "passwordForm">
+          <div class="form-group">
+            <label for="name">User Password</label>
+            <input type="password" class="form-control" id="userPassword"  formControlName="userPassword" placeholder="Enter password">
+          </div>
+          </form>
+          <br/>
+     
+         <form [formGroup] = "phoneForm">
+         <div class="form-group">
+           <label for="name">User Phone</label>
+           <input [class.is-invalid] = "phoneForm.touched && phoneForm.invalid" type="text" class="form-control" id="userPhone"  formControlName="userPhone" placeholder="90-87834634">  
+           <small [class.d-none] = "phoneForm.untouched || phoneForm.valid">Invalid phone number</small>
+         </div>
+       </form>
+         <br/>
+     
+         <form [formGroup] = "emailForm">
+         <div class="form-group">
+             <label for="name">User Email</label>
+             <input [class.is-invalid] = "emailForm.touched && emailForm.invalid" type="email" class="form-control" id="userEmail"  formControlName="userEmail" placeholder="Enter Email address">
+             <small [class.d-none] = "emailForm.untouched || emailForm.valid">Invalid Mail</small>
+         </div>
+         </form>
+         <br/>
+     
+         <form [formGroup] = "typeForm">
+         <div class="form-group">
+             <label for="name">User Role</label>
+             <input [class.is-invalid] = "typeForm.touched && typeForm.invalid" type="text" class="form-control" id="userType"  formControlName="userType" placeholder="Admin/Customer">
+             <small [class.d-none] = "typeForm.untouched || typeForm.valid">Type can either be Admin or Customer</small>
+         </div>
+         </form>
+      <br/><br/><br/>
+    <div class = "center1">  <button (click) = "register()" class='btn btn-primary btn-lg'>Register</button> &nbsp;<button (click) = "login()" class='btn btn-primary btn-lg'>Back to Login</button></div>
+    </div>
+</div>
+</div>
+
