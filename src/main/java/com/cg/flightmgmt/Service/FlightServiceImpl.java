@@ -36,9 +36,9 @@ public class FlightServiceImpl implements FlightService {
 	}
 
 	@Override
-	public Flight modifyFlight(Flight flight) {
+	public Flight modifyFlight(BigInteger flightNumber,Flight flight) {
 		// TODO Auto-generated method stub
-		Flight flightDb = flightDao.findById(flight.getFlightNumber()).orElse(null);
+		Flight flightDb = flightDao.findById(flightNumber).orElse(null);
 
 		if(Objects.isNull(flightDb)) {
 			throw new FlightNotFoundException("Flight is not avialable");

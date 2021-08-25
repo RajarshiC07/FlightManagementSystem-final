@@ -9,7 +9,7 @@ public interface FlightService {
 	
 	public Flight addFlight(Flight flight); 
 	
-	public  Flight modifyFlight(Flight flight);
+	public  Flight modifyFlight(BigInteger flightNumber,Flight flight);
 	
 	public Flight viewFlight(BigInteger flightNumber);
 	

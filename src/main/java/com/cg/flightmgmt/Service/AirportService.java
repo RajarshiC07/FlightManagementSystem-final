@@ -12,9 +12,9 @@ public interface AirportService {
 	
 	public Airport viewAirport(String airportCode);
 	
-	public ResponseEntity<?> addAirport(Airport airport);
+	public Airport addAirport(Airport airport);
 	
-	public ResponseEntity<?> modifyAirport(Airport airport);
+	public Airport modifyAirport(String airportCode,Airport airport);
 	
-	public ResponseEntity<?> removeAirport(String airportCode);
+	public Airport removeAirport(String airportCode);
 }

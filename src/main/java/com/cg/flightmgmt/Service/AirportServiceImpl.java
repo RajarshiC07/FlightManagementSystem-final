@@ -39,29 +39,28 @@ public class AirportServiceImpl implements AirportService{
 			throw new AirportNotFoundException("Airport with airport code "+airportCode+" does not exists");
 	}
 	
-	public ResponseEntity<?> addAirport(Airport airport)
+	public Airport addAirport(Airport airport)
 	{
 		if(Objects.nonNull(airportDao.findById(airport.getAirportCode()).orElse(null)))
 			throw new RecordAlreadyPresentException("The airport with airport code "+airport.getAirportCode()+" already exists");
 		else
 		{
-			airportDao.save(airport);
-			return new ResponseEntity<Airport>(airport,HttpStatus.CREATED);
+			return airportDao.save(airport);		
 		}
 	}
 	
 	/*
 	 * remove airport
 	 */
-	public ResponseEntity<?> removeAirport(String airportCode)
+	public Airport removeAirport(String airportCode)
 	{
 		Airport airport = airportDao.getById(airportCode);
 		if(Objects.isNull(airport))
 			throw new AirportNotFoundException("Airport with airport code "+airportCode+" does not exists");
 		else
 		{
-			airportDao.deleteById(airportCode);
-			return ResponseEntity.ok("Airport with airport code "+airportCode+" has been deleted");			
+			 airportDao.deleteById(airportCode);		
+			 return airport;
 		}
 	}
 	
@@ -69,7 +68,7 @@ public class AirportServiceImpl implements AirportService{
 	 * modify airport
 	 */
 
-	public ResponseEntity<?> modifyAirport(Airport airport)
+	public Airport modifyAirport(String airportCode,Airport airport)
 	{
 		Airport airportdb = airportDao.findById(airport.getAirportCode()).orElse(null);
 		if(Objects.isNull(airportdb))
@@ -81,7 +80,6 @@ public class AirportServiceImpl implements AirportService{
 			if(Objects.nonNull(airport.getAirportName()))
 				airportdb.setAirportName(airport.getAirportName());
 		}
-		airportDao.save(airport);
-		return ResponseEntity.ok(airport.getAirportCode()+" has been modified");
+		return airportDao.save(airportdb);
 	}
 }
